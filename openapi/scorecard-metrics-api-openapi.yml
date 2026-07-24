@@ -1,0 +1,968 @@
+openapi: 3.1.0
+info:
+  title: Scorecard Metrics API
+  description: REST API for Scorecard
+  version: 1.0.0
+servers:
+- url: https://api2.scorecard.io/api/v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Metrics
+paths:
+  /metrics/{metricId}:
+    get:
+      operationId: getMetric
+      summary: Get Metric
+      description: Retrieve a specific Metric by ID.
+      parameters:
+      - in: path
+        name: metricId
+        description: The ID of the Metric to retrieve.
+        schema:
+          type: string
+          example: '321'
+        required: true
+      responses:
+        '200':
+          description: Successfully retrieved Metric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+              examples:
+                AI Metric:
+                  summary: AI Metric
+                  description: Example response showing an AI metric with boolean output.
+                  value:
+                    id: '654'
+                    name: Response Accuracy
+                    description: Evaluates factual correctness
+                    evalType: ai
+                    guidelines: Check if the response is factually correct.
+                    promptTemplate: 'Evaluate if the following response is factually correct: {{outputs.response}}'
+                    evalModelName: gpt-4o
+                    temperature: 0.1
+                    outputType: boolean
+                Human Float Metric:
+                  summary: Human Float Metric
+                  description: Example response showing a human evaluated metric with float output.
+                  value:
+                    id: '655'
+                    name: Response Quality
+                    description: Human review of response quality
+                    evalType: human
+                    guidelines: Rate the response quality between 0 and 1.
+                    outputType: float
+                    passingThreshold: 0.85
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst metric = await client.metrics.get('321');\n\nconsole.log(metric);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\nmetric = client.metrics.get(\n    \"321\",\n)\nprint(metric)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/metrics/$METRIC_ID \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
+      tags:
+      - Metrics
+    patch:
+      operationId: updateMetric
+      summary: Update Metric
+      description: Update an existing Metric. You must specify the evalType and outputType of the metric. The structure of a metric depends on the evalType and outputType of the metric.
+      parameters:
+      - in: path
+        name: metricId
+        description: The ID of the Metric to update.
+        schema:
+          type: string
+          example: '321'
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: ai
+                    description: AI-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for AI evaluation on how to score the metric.
+                  promptTemplate:
+                    type: string
+                    description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+                  evalModelName:
+                    type: string
+                    default: gpt-4o
+                    description: The AI model to use for evaluation.
+                  temperature:
+                    type: number
+                    minimum: 0
+                    maximum: 2
+                    default: 0
+                    description: The temperature for AI evaluation (0-2).
+                  outputType:
+                    type: string
+                    const: int
+                    description: Integer output type.
+                  passingThreshold:
+                    type: integer
+                    minimum: 1
+                    maximum: 5
+                    default: 4
+                    description: The threshold for determining pass/fail from integer scores (1-5).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with AI evaluation and integer output.
+                title: AI int metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: human
+                    description: Human-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for human evaluators.
+                  outputType:
+                    type: string
+                    const: int
+                    description: Integer output type.
+                  passingThreshold:
+                    type: integer
+                    minimum: 1
+                    maximum: 5
+                    default: 4
+                    description: The threshold for determining pass/fail from integer scores (1-5).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with human evaluation and integer output.
+                title: Human int metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: heuristic
+                    description: Heuristic-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for heuristic evaluation logic.
+                  outputType:
+                    type: string
+                    const: int
+                    description: Integer output type.
+                  passingThreshold:
+                    type: integer
+                    minimum: 1
+                    maximum: 5
+                    default: 4
+                    description: The threshold for determining pass/fail from integer scores (1-5).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with heuristic evaluation and integer output.
+                title: Heuristic int metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: ai
+                    description: AI-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for AI evaluation on how to score the metric.
+                  promptTemplate:
+                    type: string
+                    description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+                  evalModelName:
+                    type: string
+                    default: gpt-4o
+                    description: The AI model to use for evaluation.
+                  temperature:
+                    type: number
+                    minimum: 0
+                    maximum: 2
+                    default: 0
+                    description: The temperature for AI evaluation (0-2).
+                  outputType:
+                    type: string
+                    const: float
+                    description: Float output type (0-1).
+                  passingThreshold:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+                    default: 0.9
+                    description: Threshold for determining pass/fail from float scores (0.0-1.0).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with AI evaluation and float output.
+                title: AI float metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: human
+                    description: Human-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for human evaluators.
+                  outputType:
+                    type: string
+                    const: float
+                    description: Float output type (0-1).
+                  passingThreshold:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+                    default: 0.9
+                    description: Threshold for determining pass/fail from float scores (0.0-1.0).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with human evaluation and float output.
+                title: Human float metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: heuristic
+                    description: Heuristic-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for heuristic evaluation logic.
+                  outputType:
+                    type: string
+                    const: float
+                    description: Float output type (0-1).
+                  passingThreshold:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+                    default: 0.9
+                    description: Threshold for determining pass/fail from float scores (0.0-1.0).
+                required:
+                - evalType
+                - outputType
+                description: A Metric with heuristic evaluation and float output.
+                title: Heuristic float metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: ai
+                    description: AI-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for AI evaluation on how to score the metric.
+                  promptTemplate:
+                    type: string
+                    description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+                  evalModelName:
+                    type: string
+                    default: gpt-4o
+                    description: The AI model to use for evaluation.
+                  temperature:
+                    type: number
+                    minimum: 0
+                    maximum: 2
+                    default: 0
+                    description: The temperature for AI evaluation (0-2).
+                  outputType:
+                    type: string
+                    const: boolean
+                    description: Boolean output type.
+                required:
+                - evalType
+                - outputType
+                description: A Metric with AI evaluation and boolean output.
+                title: AI boolean metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: human
+                    description: Human-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for human evaluators.
+                  outputType:
+                    type: string
+                    const: boolean
+                    description: Boolean output type.
+                required:
+                - evalType
+                - outputType
+                description: A Metric with human evaluation and boolean output.
+                title: Human boolean metric
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the Metric.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    default: null
+                    description: The description of the Metric.
+                  evalType:
+                    type: string
+                    const: heuristic
+                    description: Heuristic-based evaluation type.
+                  guidelines:
+                    type: string
+                    description: Guidelines for heuristic evaluation logic.
+                  outputType:
+                    type: string
+                    const: boolean
+                    description: Boolean output type.
+                required:
+                - evalType
+                - outputType
+                description: A Metric with heuristic evaluation and boolean output.
+                title: Heuristic boolean metric
+            examples:
+              Update AI metric's prompt template:
+                value:
+                  evalType: ai
+                  outputType: boolean
+                  promptTemplate: 'Using the following guidelines, evaluate the response: {{ guidelines }}
+
+
+                    Response: {{ outputs.response }}
+
+
+                    Ideal answer: {{ expected.idealResponse }}'
+                summary: Update AI metric's prompt template
+                description: Update the prompt template of an AI boolean metric.
+              Update metric name:
+                value:
+                  evalType: ai
+                  outputType: boolean
+                  name: Updated Metric Name
+                summary: Update metric name
+                description: Update the name of an AI boolean metric.
+              Update metric output type:
+                value:
+                  evalType: human
+                  outputType: int
+                  passingThreshold: 4
+                summary: Update metric output type
+                description: Update a metric to be a human int evaluated metric.
+      responses:
+        '200':
+          description: Metric updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+              examples:
+                Updated AI metric's prompt template:
+                  value:
+                    id: '321'
+                    name: Response Accuracy
+                    description: Evaluates if the response is factually accurate
+                    outputType: boolean
+                    evalType: ai
+                    evalModelName: gpt-4o
+                    guidelines: Check if the response contains factually correct information
+                    promptTemplate: 'Using the following guidelines, evaluate the response: {{ guidelines }}
+
+
+                      Response: {{ outputs.response }}
+
+
+                      Ideal answer: {{ expected.idealResponse }}'
+                    temperature: 0.1
+                  summary: Updated AI metric's prompt template
+                  description: Response after successfully updating an AI metric's prompt template.
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst metric = await client.metrics.update('321', {\n  evalType: 'ai',\n  outputType: 'boolean',\n  promptTemplate:\n    'Using the following guidelines, evaluate the response: {{ guidelines }}\\n\\nResponse: {{ outputs.response }}\\n\\nIdeal answer: {{ expected.idealResponse }}',\n});\n\nconsole.log(metric);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\nmetric = client.metrics.update(\n    metric_id=\"321\",\n    eval_type=\"ai\",\n    output_type=\"boolean\",\n    prompt_template=\"Using the following guidelines, evaluate the response: {{ guidelines }}\\n\\nResponse: {{ outputs.response }}\\n\\nIdeal answer: {{ expected.idealResponse }}\",\n)\nprint(metric)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/metrics/$METRIC_ID \\\n    -X PATCH \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
+      tags:
+      - Metrics
+    delete:
+      operationId: deleteMetric
+      summary: Delete Metric
+      description: Delete a specific Metric by ID. The metric will be removed from metric groups and monitors.
+      parameters:
+      - in: path
+        name: metricId
+        description: The ID of the Metric to delete.
+        schema:
+          type: string
+          example: '321'
+        required: true
+      responses:
+        '200':
+          description: Metric deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Whether the deletion was successful.
+                required:
+                - success
+              examples:
+                Successful deletion:
+                  value:
+                    success: true
+                  summary: Successful deletion
+                  description: Response after successfully deleting a metric.
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst metric = await client.metrics.delete('321');\n\nconsole.log(metric.success);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\nmetric = client.metrics.delete(\n    \"321\",\n)\nprint(metric.success)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/metrics/$METRIC_ID \\\n    -X DELETE \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
+      tags:
+      - Metrics
+components:
+  responses:
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+  schemas:
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
+    Metric:
+      anyOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: ai
+            description: AI-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for AI evaluation on how to score the metric.
+          promptTemplate:
+            type: string
+            description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+          evalModelName:
+            type: string
+            default: gpt-4o
+            description: The AI model to use for evaluation.
+          temperature:
+            type: number
+            minimum: 0
+            maximum: 2
+            default: 0
+            description: The temperature for AI evaluation (0-2).
+          outputType:
+            type: string
+            const: int
+            description: Integer output type.
+          passingThreshold:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 4
+            description: The threshold for determining pass/fail from integer scores (1-5).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - promptTemplate
+        - evalModelName
+        - temperature
+        - outputType
+        - passingThreshold
+        description: A Metric with AI evaluation and integer output.
+        title: AI int metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: human
+            description: Human-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for human evaluators.
+          outputType:
+            type: string
+            const: int
+            description: Integer output type.
+          passingThreshold:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 4
+            description: The threshold for determining pass/fail from integer scores (1-5).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        - passingThreshold
+        description: A Metric with human evaluation and integer output.
+        title: Human int metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: heuristic
+            description: Heuristic-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for heuristic evaluation logic.
+          outputType:
+            type: string
+            const: int
+            description: Integer output type.
+          passingThreshold:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 4
+            description: The threshold for determining pass/fail from integer scores (1-5).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        - passingThreshold
+        description: A Metric with heuristic evaluation and integer output.
+        title: Heuristic int metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: ai
+            description: AI-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for AI evaluation on how to score the metric.
+          promptTemplate:
+            type: string
+            description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+          evalModelName:
+            type: string
+            default: gpt-4o
+            description: The AI model to use for evaluation.
+          temperature:
+            type: number
+            minimum: 0
+            maximum: 2
+            default: 0
+            description: The temperature for AI evaluation (0-2).
+          outputType:
+            type: string
+            const: float
+            description: Float output type (0-1).
+          passingThreshold:
+            type: number
+            minimum: 0
+            maximum: 1
+            default: 0.9
+            description: Threshold for determining pass/fail from float scores (0.0-1.0).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - promptTemplate
+        - evalModelName
+        - temperature
+        - outputType
+        - passingThreshold
+        description: A Metric with AI evaluation and float output.
+        title: AI float metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: human
+            description: Human-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for human evaluators.
+          outputType:
+            type: string
+            const: float
+            description: Float output type (0-1).
+          passingThreshold:
+            type: number
+            minimum: 0
+            maximum: 1
+            default: 0.9
+            description: Threshold for determining pass/fail from float scores (0.0-1.0).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        - passingThreshold
+        description: A Metric with human evaluation and float output.
+        title: Human float metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: heuristic
+            description: Heuristic-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for heuristic evaluation logic.
+          outputType:
+            type: string
+            const: float
+            description: Float output type (0-1).
+          passingThreshold:
+            type: number
+            minimum: 0
+            maximum: 1
+            default: 0.9
+            description: Threshold for determining pass/fail from float scores (0.0-1.0).
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        - passingThreshold
+        description: A Metric with heuristic evaluation and float output.
+        title: Heuristic float metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: ai
+            description: AI-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for AI evaluation on how to score the metric.
+          promptTemplate:
+            type: string
+            description: The complete prompt template for AI evaluation. Should include placeholders for dynamic content.
+          evalModelName:
+            type: string
+            default: gpt-4o
+            description: The AI model to use for evaluation.
+          temperature:
+            type: number
+            minimum: 0
+            maximum: 2
+            default: 0
+            description: The temperature for AI evaluation (0-2).
+          outputType:
+            type: string
+            const: boolean
+            description: Boolean output type.
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - promptTemplate
+        - evalModelName
+        - temperature
+        - outputType
+        description: A Metric with AI evaluation and boolean output.
+        title: AI boolean metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: human
+            description: Human-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for human evaluators.
+          outputType:
+            type: string
+            const: boolean
+            description: Boolean output type.
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        description: A Metric with human evaluation and boolean output.
+        title: Human boolean metric
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the Metric.
+          name:
+            type: string
+            description: The name of the Metric.
+          description:
+            type:
+            - string
+            - 'null'
+            default: null
+            description: The description of the Metric.
+          evalType:
+            type: string
+            const: heuristic
+            description: Heuristic-based evaluation type.
+          guidelines:
+            type: string
+            description: Guidelines for heuristic evaluation logic.
+          outputType:
+            type: string
+            const: boolean
+            description: Boolean output type.
+        required:
+        - id
+        - name
+        - description
+        - evalType
+        - guidelines
+        - outputType
+        description: A Metric with heuristic evaluation and boolean output.
+        title: Heuristic boolean metric
+      description: A Metric defines how to evaluate system outputs against expected results.
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: starts with ak_

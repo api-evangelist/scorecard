@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: Scorecard Metrics Testcases API
+  description: REST API for Scorecard
+  version: 1.0.0
+servers:
+- url: https://api2.scorecard.io/api/v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Testcases
+paths:
+  /testcases/{testcaseId}:
+    get:
+      operationId: getTestcase
+      summary: Get Testcase
+      description: Retrieve a specific Testcase by ID.
+      parameters:
+      - in: path
+        name: testcaseId
+        description: The ID of the Testcase to retrieve.
+        schema:
+          type: string
+          example: '248'
+        required: true
+      responses:
+        '200':
+          description: Successfully retrieved Testcase.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testcase'
+              examples:
+                Testcase details:
+                  value:
+                    id: '248'
+                    testsetId: '246'
+                    jsonData:
+                      question: What is the capital of France?
+                      idealAnswer: Paris
+                      provenance: hand_curated
+                    inputs:
+                      question: What is the capital of France?
+                    expected:
+                      idealAnswer: Paris
+                  summary: Testcase details
+                  description: Example response showing a Testcase's details.
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst testcase = await client.testcases.get('248');\n\nconsole.log(testcase.id);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\ntestcase = client.testcases.get(\n    \"248\",\n)\nprint(testcase.id)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/testcases/$TESTCASE_ID \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
+      tags:
+      - Testcases
+    put:
+      operationId: updateTestcase
+      summary: Update Testcase
+      description: Replace the data of an existing Testcase while keeping its ID.
+      parameters:
+      - in: path
+        name: testcaseId
+        description: The ID of the Testcase to update.
+        schema:
+          type: string
+          example: '248'
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonData:
+                  type: object
+                  additionalProperties: true
+                  description: The JSON data of the Testcase, which is validated against the Testset's schema.
+              required:
+              - jsonData
+            examples:
+              Update Testcase data:
+                value:
+                  jsonData:
+                    question: What is the capital of France?
+                    idealAnswer: Paris is the capital of France
+                    provenance: hand_curated
+                summary: Update Testcase data
+                description: Update the content of a Testcase with improved information.
+      responses:
+        '200':
+          description: Testcase updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testcase'
+              examples:
+                Updated Testcase:
+                  value:
+                    id: '248'
+                    testsetId: '246'
+                    jsonData:
+                      question: What is the capital of France?
+                      idealAnswer: Paris is the capital of France
+                      provenance: hand_curated
+                    inputs:
+                      question: What is the capital of France?
+                    expected:
+                      idealAnswer: Paris is the capital of France
+                  summary: Updated Testcase
+                  description: Example response showing a successfully updated Testcase.
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst testcase = await client.testcases.update('248', {\n  jsonData: {\n    question: 'What is the capital of France?',\n    idealAnswer: 'Paris is the capital of France',\n    provenance: 'hand_curated',\n  },\n});\n\nconsole.log(testcase.id);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\ntestcase = client.testcases.update(\n    testcase_id=\"248\",\n    json_data={\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris is the capital of France\",\n        \"provenance\": \"hand_curated\",\n    },\n)\nprint(testcase.id)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/testcases/$TESTCASE_ID \\\n    -X PUT \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\" \\\n    -d '{\n          \"jsonData\": {\n            \"question\": \"bar\",\n            \"idealAnswer\": \"bar\",\n            \"provenance\": \"bar\"\n          }\n        }'"
+      tags:
+      - Testcases
+  /testcases/bulk-delete:
+    post:
+      operationId: deleteTestcases
+      summary: Delete multiple Testcases
+      description: Delete multiple Testcases by their IDs.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                  description: IDs of Testcases to delete.
+              required:
+              - ids
+            examples:
+              Delete multiple Testcases:
+                value:
+                  ids:
+                  - '123'
+                  - '124'
+                  - '125'
+      responses:
+        '200':
+          description: Testcases deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Whether the deletion was successful.
+                required:
+                - success
+              examples:
+                Delete multiple Testcases:
+                  value:
+                    success: true
+        '401':
+          $ref: '#/components/responses/UnauthenticatedError'
+        '500':
+          $ref: '#/components/responses/ServiceError'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import Scorecard from 'scorecard-ai';\n\nconst client = new Scorecard({\n  apiKey: process.env['SCORECARD_API_KEY'], // This is the default and can be omitted\n});\n\nconst testcase = await client.testcases.delete({ ids: ['123', '124', '125'] });\n\nconsole.log(testcase.success);"
+      - lang: Python
+        source: "import os\nfrom scorecard_ai import Scorecard\n\nclient = Scorecard(\n    api_key=os.environ.get(\"SCORECARD_API_KEY\"),  # This is the default and can be omitted\n)\ntestcase = client.testcases.delete(\n    ids=[\"123\", \"124\", \"125\"],\n)\nprint(testcase.success)"
+      - lang: cURL
+        source: "curl https://api2.scorecard.io/api/v2/testcases/bulk-delete \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\" \\\n    -d '{\n          \"ids\": [\n            \"123\",\n            \"124\",\n            \"125\"\n          ]\n        }'"
+      tags:
+      - Testcases
+components:
+  responses:
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+  schemas:
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
+    Testcase:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Testcase.
+        testsetId:
+          type: string
+          description: The ID of the Testset this Testcase belongs to.
+        jsonData:
+          type: object
+          additionalProperties: true
+          description: The JSON data of the Testcase, which is validated against the Testset's schema.
+        inputs:
+          type: object
+          additionalProperties: true
+          description: Derived from data based on the Testset's fieldMapping. Contains all fields marked as inputs, including those with validation errors.
+        expected:
+          type: object
+          additionalProperties: true
+          description: Derived from data based on the Testset's fieldMapping. Contains all fields marked as expected outputs, including those with validation errors.
+        validationErrors:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                description: JSON Pointer to the field with the validation error.
+                example: /data/question
+              message:
+                type: string
+                description: Human-readable error description.
+                example: Required field missing
+            required:
+            - path
+            - message
+          description: Validation errors found in the Testcase data. If present, the Testcase doesn't fully conform to its Testset's schema.
+      required:
+      - id
+      - testsetId
+      - jsonData
+      - inputs
+      - expected
+      description: 'A test case in the Scorecard system. Contains JSON data that is validated against the schema defined by its Testset.
+
+        The `inputs` and `expected` fields are derived from the `data` field based on the Testset''s `fieldMapping`, and include all mapped fields, including those with validation errors.
+
+        Testcases are stored regardless of validation results, with any validation errors included in the `validationErrors` field.'
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: starts with ak_
