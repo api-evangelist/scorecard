@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/scorecard-openapi-original.yml
+format: custom-json
+envelope:
+  schema: ApiError
+  fields:
+    code: string (machine-readable error code)
+    message: string (human-readable message)
+    details: object (additional context, additionalProperties)
+  required: [code, message, details]
+notes: >-
+  Scorecard returns a custom JSON error envelope (not RFC 9457 problem+json).
+  The OpenAPI declares 401 (unauthorized) and 500 (server error) responses
+  across operations, plus 200/201 success. Titles/remediation below are derived
+  from the response set.
+problems:
+- status: 401
+  code: unauthorized
+  title: Unauthorized
+  remediation: Provide a valid Bearer API key (prefix ak_) in the Authorization header.
+- status: 500
+  code: internal_server_error
+  title: Internal server error
+  schema: ApiError
+  remediation: Retry with backoff; contact team@scorecard.io if the error persists.

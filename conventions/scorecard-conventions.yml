@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/scorecard-openapi-original.yml + https://docs.scorecard.io/
+authentication:
+  style: http-bearer
+  scheme: Bearer
+  token_prefix: ak_
+  header: Authorization
+  reference: authentication/scorecard-authentication.yml
+pagination:
+  style: cursor
+  request_params:
+    limit: query
+    cursor: query
+  response_fields:
+    data: array of resource objects
+    nextCursor: string|null cursor for the next page
+    hasMore: boolean
+    total: integer (when available)
+  notes: List endpoints return a cursor-paginated envelope; pass nextCursor back as cursor to page.
+idempotency:
+  key_header: null
+  notes: >-
+    No client-supplied Idempotency-Key header is documented. Idempotency is
+    instead provided at the operation level: PUT/upsert operations
+    (upsertScore, upsertSystem, upsertSystemVersion, updateTestcase) and
+    createRecordTag are idempotent by design — re-applying an existing tag or
+    upserting an existing resource returns/updates it rather than duplicating.
+versioning:
+  style: uri-path
+  current: v2
+  reference: lifecycle/scorecard-lifecycle.yml
+error_envelope:
+  format: custom-json
+  schema: ApiError
+  fields:
+    code: string (machine-readable error code)
+    message: string (human-readable message)
+    details: object (additional context)
+  reference: errors/scorecard-problem-types.yml
+rate_limiting:
+  signaling: null
+  notes: No documented rate-limit response headers located in the OpenAPI or docs during this pass.
+request_limits:
+  max_body_size: 15MB (record creation, per 2026-07-10 changelog)

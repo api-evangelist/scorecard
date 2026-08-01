@@ -1,0 +1,81 @@
+# Scorecard Docs
+
+## Docs
+
+- [Create Metric](https://docs.scorecard.io/api-reference/create-metric.md): Create a new Metric for evaluating system outputs. The structure of a metric depends on the evalType and outputType of the metric.
+- [Create multiple Testcases](https://docs.scorecard.io/api-reference/create-multiple-testcases.md): Create multiple Testcases in the specified Testset.
+- [Create Project](https://docs.scorecard.io/api-reference/create-project.md): Create a new Project.
+- [Create Record](https://docs.scorecard.io/api-reference/create-record.md): Create a new Record in a Run.
+- [Create Record Tag](https://docs.scorecard.io/api-reference/create-record-tag.md): Apply a tag to a Record. Idempotent: re-applying an existing tag returns the existing tag.
+- [Create Run](https://docs.scorecard.io/api-reference/create-run.md): Create a new Run.
+- [Create Testset](https://docs.scorecard.io/api-reference/create-testset.md): Create a new Testset for a Project. The Testset will be created in the Project specified in the path.
+- [Create (upsert) system](https://docs.scorecard.io/api-reference/create-upsert-system.md): Create a new system. If one with the same name in the project exists, it updates it instead.
+- [Delete Metric](https://docs.scorecard.io/api-reference/delete-metric.md): Delete a specific Metric by ID. The metric will be removed from metric groups and monitors.
+- [Delete multiple Testcases](https://docs.scorecard.io/api-reference/delete-multiple-testcases.md): Delete multiple Testcases by their IDs.
+- [Delete Record](https://docs.scorecard.io/api-reference/delete-record.md): Delete a specific Record by ID.
+- [Delete Record Tag](https://docs.scorecard.io/api-reference/delete-record-tag.md): Remove a tag from a Record by its text.
+- [Delete system](https://docs.scorecard.io/api-reference/delete-system.md): Delete a system definition by ID. This will not delete associated system versions.
+- [Delete Testset](https://docs.scorecard.io/api-reference/delete-testset.md)
+- [Get Metric](https://docs.scorecard.io/api-reference/get-metric.md): Retrieve a specific Metric by ID.
+- [Get Run](https://docs.scorecard.io/api-reference/get-run.md): Retrieve a specific Run by ID.
+- [Get system](https://docs.scorecard.io/api-reference/get-system.md): Retrieve a specific system by ID.
+- [Get system version](https://docs.scorecard.io/api-reference/get-system-version.md): Retrieve a specific system version by ID.
+- [Get Testcase](https://docs.scorecard.io/api-reference/get-testcase.md): Retrieve a specific Testcase by ID.
+- [Get Testset](https://docs.scorecard.io/api-reference/get-testset.md)
+- [List Annotations](https://docs.scorecard.io/api-reference/list-annotations.md): List all annotations (ratings and comments) for a specific Record.
+- [List Metrics](https://docs.scorecard.io/api-reference/list-metrics.md): List Metrics configured for the specified Project. Metrics are returned in reverse chronological order.
+- [List Projects](https://docs.scorecard.io/api-reference/list-projects.md): Retrieve a paginated list of all Projects. Projects are ordered by creation date, with oldest Projects first.
+- [List Record Tags](https://docs.scorecard.io/api-reference/list-record-tags.md): List all tags applied to a specific Record.
+- [List Records and Scores](https://docs.scorecard.io/api-reference/list-records.md): Retrieve a paginated list of Records for a Run, including all scores for each record.
+- [List Runs](https://docs.scorecard.io/api-reference/list-runs.md): Retrieve a paginated list of all Runs for a Project. Runs are ordered by creation date, most recent first.
+- [List systems](https://docs.scorecard.io/api-reference/list-systems.md): Retrieve a paginated list of all systems. Systems are ordered by creation date.
+- [List Testcases in Testset](https://docs.scorecard.io/api-reference/list-testcases-in-testset.md): Retrieve a paginated list of Testcases belonging to a Testset.
+- [List Testsets in Project](https://docs.scorecard.io/api-reference/list-testsets-in-project.md): Retrieve a paginated list of Testsets belonging to a Project.
+- [API Reference](https://docs.scorecard.io/api-reference/overview.md): Browse the API documentation and integrate with Scorecard's API endpoints.
+- [Update Metric](https://docs.scorecard.io/api-reference/update-metric.md): Update an existing Metric. You must specify the evalType and outputType of the metric. The structure of a metric depends on the evalType and outputType of the metric.
+- [Update system](https://docs.scorecard.io/api-reference/update-system.md): Update an existing system. Only the fields provided in the request body will be updated. If a field is provided, the new content will replace the existing content. If a field is not provided, the existing content will remain unchanged.
+- [Update Testcase](https://docs.scorecard.io/api-reference/update-testcase.md): Replace the data of an existing Testcase while keeping its ID.
+- [Update Testset](https://docs.scorecard.io/api-reference/update-testset.md): Update a Testset. Only the fields provided in the request body will be updated. If a field is provided, the new content will replace the existing content. If a field is not provided, the existing content will remain unchanged.
+- [Upsert Score](https://docs.scorecard.io/api-reference/upsert-score.md): Create or update a Score for a given Record and MetricConfig. If a Score with the specified Record ID and MetricConfig ID already exists, it will be updated. Otherwise, a new Score will be created. The score provided should conform to the schema defined by the MetricConfig; otherwise, validation err…
+- [Upsert system version](https://docs.scorecard.io/api-reference/upsert-system-version.md): Create a new system version if it does not already exist. Does **not** set the created version to be the system's production version.
+- [Product Updates](https://docs.scorecard.io/changelog.md): New updates and improvements
+- [A/B Comparison](https://docs.scorecard.io/features/a-b-comparison.md): Compare different AI agent runs side-by-side to make data-driven decisions about model improvements, prompt optimizations, and configuration changes.
+- [AI Guardrails](https://docs.scorecard.io/features/ai-guardrails.md): In order to develop controllable and safe LLM applications, you can integrate Scorecard with the open-source toolkits [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://github.com/guardrails-ai/guardrails).
+- [Vercel AI SDK Quick Start](https://docs.scorecard.io/features/ai-sdk-wrapper.md): Automatically trace and monitor your Vercel AI SDK applications with zero manual instrumentation
+- [Custom LLM Providers](https://docs.scorecard.io/features/custom-provider.md): Scorecard supports multiple AI providers through our AI proxy infrastructure, allowing you to easily configure and switch between different LLM services.
+- [Custom Endpoints](https://docs.scorecard.io/features/endpoints.md): Test and evaluate agent APIs and any HTTP endpoint with Scorecard
+- [Enterprise Authentication](https://docs.scorecard.io/features/enterprise-authentication.md): Secure enterprise-grade authentication with SAML SSO and advanced security features
+- [GitHub Actions Integration](https://docs.scorecard.io/features/github-actions.md)
+- [MCP Server Integration](https://docs.scorecard.io/features/mcp.md): Use AI assistants as your evaluation companion with Scorecard's Model Context Protocol server
+- [Metrics](https://docs.scorecard.io/features/metrics.md)
+- [Multi-turn simulation](https://docs.scorecard.io/features/multi-turn-simulation.md): Test conversational AI agents with realistic multi-turn simulations and automated user personas.
+- [Playground](https://docs.scorecard.io/features/playground.md): Test agents against testcases and score results with metrics — all in one visual workspace.
+- [Organizations & Projects](https://docs.scorecard.io/features/projects.md): Manage your team's evaluation work with Organizations and Projects
+- [Prompts](https://docs.scorecard.io/features/prompts.md): Create, version, test, and deploy prompts with integrated evaluation workflows.
+- [Records](https://docs.scorecard.io/features/records.md): View, filter, and analyze all evaluation records across your project.
+- [Runs & Results](https://docs.scorecard.io/features/runs.md): Execute evaluations and analyze AI agent performance.
+- [SDK + Tracing](https://docs.scorecard.io/features/sdk-tracing.md): Combine structured evaluation data with detailed trace observability in a single record.
+- [Security & Privacy](https://docs.scorecard.io/features/security-and-privacy.md): Preserving the privacy of our clients and ensuring secure processes is of top priority at Scorecard.
+- [Synthetic Data Generation](https://docs.scorecard.io/features/synthetic-data-generation.md): Generate high-quality synthetic test data for comprehensive AI evaluation
+- [Testsets](https://docs.scorecard.io/features/testsets.md): Use Testsets to create curated datasets for evaluating your AI agents
+- [Tracing](https://docs.scorecard.io/features/tracing.md): Instrument and inspect every LLM request in minutes.
+- [Claude Agent SDK Tracing](https://docs.scorecard.io/intro/claude-agent-sdk-tracing.md): Trace your Claude Agent SDK applications with Scorecard.
+- [Frequently Asked Questions](https://docs.scorecard.io/intro/faq.md): Common questions about Scorecard's AI evaluation platform
+- [LangChain Tracing](https://docs.scorecard.io/intro/langchain-quickstart.md): Trace your LangChain applications with Scorecard using OpenLLMetry.
+- [MCP Server Quickstart](https://docs.scorecard.io/intro/mcp-quickstart.md): Build testsets and metrics conversationally with Claude Desktop and the Scorecard MCP server
+- [Metrics Quickstart](https://docs.scorecard.io/intro/metrics-quickstart.md): Create metrics, group them, run evaluations, and read scores.
+- [Overview](https://docs.scorecard.io/intro/overview.md): The simulation platform for building frontier AI agents
+- [RAG Quickstart](https://docs.scorecard.io/intro/rag-quickstart.md): Evaluate a Retrieval Augmented Generation (RAG) agent with Scorecard in minutes.
+- [SDK Quickstart](https://docs.scorecard.io/intro/sdk-quickstart.md): Evaluate a simple LLM agent with Scorecard in minutes.
+- [Tracing Quickstart](https://docs.scorecard.io/intro/tracing-quickstart.md): Trace your LLM applications by pointing your client to Scorecard.
+- [UI Quickstart](https://docs.scorecard.io/intro/ui-quickstart.md): Send your first trace to Scorecard and explore it in the UI.
+- [What Is Scorecard?](https://docs.scorecard.io/intro/what-is-scorecard.md): The simulation platform for building frontier AI agents. Run thousands of realistic scenarios in minutes and ship new capabilities with confidence.
+
+## OpenAPI Specs
+
+- [openapi](https://docs.scorecard.io/openapi.yaml)
+
+## Optional
+
+- [About Us](https://www.scorecard.io/about-us)
+- [Blog](https://www.scorecard.io/blog)

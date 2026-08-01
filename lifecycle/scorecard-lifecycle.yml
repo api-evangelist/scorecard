@@ -1,0 +1,15 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.scorecard.io/ + https://status.scorecard.io/
+versioning:
+  scheme: uri-path
+  current: v2
+  base_url: https://api2.scorecard.io/api/v2
+  notes: API is versioned in the URI path (/api/v2). Product changes are tracked in a dated changelog.
+changelog: https://docs.scorecard.io/changelog
+status_page: https://status.scorecard.io/
+deprecation:
+  policy_url: null
+  sunset_header: null
+  notes: No public deprecation/sunset-header policy located as of this pass.
+deprecated_operations: []

@@ -1,0 +1,26 @@
+{
+  "provider": "scorecard",
+  "sources": [
+    "scorecard-metrics-api-openapi.yml",
+    "scorecard-projects-api-openapi.yml",
+    "scorecard-records-api-openapi.yml",
+    "scorecard-runs-api-openapi.yml",
+    "scorecard-systems-api-openapi.yml",
+    "scorecard-testcases-api-openapi.yml",
+    "scorecard-testsets-api-openapi.yml"
+  ],
+  "outputs": [
+    "scorecard-metrics-api-openapi.yml",
+    "scorecard-projects-api-openapi.yml",
+    "scorecard-records-api-openapi.yml",
+    "scorecard-runs-api-openapi.yml",
+    "scorecard-systems-api-openapi.yml",
+    "scorecard-testcases-api-openapi.yml",
+    "scorecard-testsets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

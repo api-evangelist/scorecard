@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/scorecard-openapi-original.yml
+skills:
+- file: scorecard-build-testset.md
+  name: Build a Scorecard evaluation testset
+  api: openapi/scorecard-openapi-original.yml
+  operations: [createProject, createTestset, createTestcases, listTestcases]
+- file: scorecard-run-and-score.md
+  name: Run a Scorecard evaluation and record scores
+  api: openapi/scorecard-openapi-original.yml
+  operations: [createMetric, createRun, createRecord, upsertScore, listRecords]

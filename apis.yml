@@ -1,25 +1,197 @@
 aid: scorecard
 name: Scorecard
-description: Scorecard is a company surfaced as a portfolio company of kindred-ventures and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Scorecard is a simulation and evaluation platform for building, testing, and
+  deploying frontier AI agents. Teams run their agents through thousands of
+  realistic scenarios, judge outputs with configurable AI, human, and heuristic
+  metrics, and ship new capabilities with confidence. The platform organizes
+  work into Projects, Testsets, Testcases, Metrics, Runs, Records, Scores, and
+  Systems, and exposes a REST API (bearer API keys prefixed ak_) plus official
+  Python, TypeScript/Node, and Go SDKs, a hosted MCP server, tracing
+  integrations for LangChain, the Vercel AI SDK, and the Claude Agent SDK, and a
+  GitHub Actions integration for evals in CI. Scorecard was founded to solve AI
+  agent evaluation at scale and is backed by Kindred Ventures.
 url: https://raw.githubusercontent.com/api-evangelist/scorecard/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - kindred-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/68012f5eeeda4ace0fca1c46/680be2472e0c42225eb5c6fb_bb737b32df1d17f3492808c99d78bb0b_scorecard-open-graph.jpg
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- AI
+- Agents
+- Evaluation
+- Testing
+- LLM
+- Observability
+- Simulation
+- Developer Tools
+- MCP
+apis:
+- aid: scorecard:scorecard-metrics-api
+  name: Scorecard Metrics API
+  description: The Metrics API from Scorecard — 1 operation(s) for metrics.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-projects-api
+  name: Scorecard Projects API
+  description: The Projects API from Scorecard — 5 operation(s) for projects.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-records-api
+  name: Scorecard Records API
+  description: The Records API from Scorecard — 5 operation(s) for records.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Records
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-records-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-runs-api
+  name: Scorecard Runs API
+  description: The Runs API from Scorecard — 2 operation(s) for runs.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-runs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-systems-api
+  name: Scorecard Systems API
+  description: The Systems API from Scorecard — 3 operation(s) for systems.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Systems
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-systems-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-testcases-api
+  name: Scorecard Testcases API
+  description: The Testcases API from Scorecard — 2 operation(s) for testcases.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Testcases
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-testcases-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+- aid: scorecard:scorecard-testsets-api
+  name: Scorecard Testsets API
+  description: The Testsets API from Scorecard — 2 operation(s) for testsets.
+  humanURL: https://docs.scorecard.io/api-reference/overview
+  baseURL: https://api2.scorecard.io/api/v2
+  tags:
+  - Testsets
+  properties:
+  - type: OpenAPI
+    url: openapi/scorecard-testsets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scorecard.io/api-reference/overview
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/scorecard-trust-center.yml
+- type: DomainSecurity
+  url: security/scorecard-domain-security.yml
 - type: Website
-  url: https://scorecard.io/
+  url: https://www.scorecard.io/
+- type: DeveloperPortal
+  url: https://docs.scorecard.io/
+- type: Documentation
+  url: https://docs.scorecard.io/
+- type: APIReference
+  url: https://docs.scorecard.io/api-reference/overview
+- type: GettingStarted
+  url: https://docs.scorecard.io/intro/sdk-quickstart
+- type: Blog
+  url: https://www.scorecard.io/blog
+- type: Pricing
+  url: https://www.scorecard.io/pricing
+- type: SignUp
+  url: https://app.getscorecard.ai/
+- type: TermsOfService
+  url: https://www.scorecard.io/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.scorecard.io/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/scorecard-ai
+- type: StatusPage
+  url: https://status.scorecard.io/
+- type: ChangeLog
+  url: https://docs.scorecard.io/changelog
+- type: Compliance
+  url: https://trust.scorecard.io/
+- type: MCPServer
+  url: mcp/scorecard-mcp.yml
+- type: Packages
+  url: packages/scorecard-packages.yml
+- type: SDKs
+  url: packages/scorecard-packages.yml
+- type: LLMsTxt
+  url: llms/scorecard-llms.txt
+- type: Authentication
+  url: authentication/scorecard-authentication.yml
+- type: Conventions
+  url: conventions/scorecard-conventions.yml
+- type: ErrorCatalog
+  url: errors/scorecard-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/scorecard-lifecycle.yml
+- type: Conformance
+  url: conformance/scorecard-conformance.yml
+- type: DataModel
+  url: data-model/scorecard-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/scorecard-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml

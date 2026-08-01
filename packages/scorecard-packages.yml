@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: registry probes (npm, PyPI, pkg.go.dev) + github.com/scorecard-ai
+packages:
+- language: python
+  registry: pypi
+  name: scorecard-ai
+  url: https://pypi.org/project/scorecard-ai/
+  install: pip install scorecard-ai
+  repository: https://github.com/scorecard-ai/scorecard-python
+  description: The official Python library for the Scorecard API.
+  official: true
+- language: typescript
+  registry: npm
+  name: scorecard-ai
+  url: https://www.npmjs.com/package/scorecard-ai
+  install: npm install scorecard-ai
+  repository: https://github.com/scorecard-ai/scorecard-node
+  description: The official TypeScript/JavaScript library for the Scorecard API.
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/scorecard-ai/scorecard-go
+  url: https://pkg.go.dev/github.com/scorecard-ai/scorecard-go
+  install: go get github.com/scorecard-ai/scorecard-go
+  repository: https://github.com/scorecard-ai/scorecard-go
+  description: The official Go library for the Scorecard API.
+  official: true
+- language: typescript
+  registry: npm
+  name: scorecard-ai-mcp
+  url: https://www.npmjs.com/package/scorecard-ai-mcp
+  install: npx -y scorecard-ai-mcp@latest
+  repository: https://github.com/scorecard-ai/scorecard-mcp
+  description: The official MCP server for the Scorecard API (see mcp/scorecard-mcp.yml).
+  official: true

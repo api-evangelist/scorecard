@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Scorecard API
+  version: 1.0.0
+extends: openapi/scorecard-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: scorecard
+    x-apievangelist-category: ai-agent-evaluation
+    x-apievangelist-auth: http-bearer (ak_)
+    x-apievangelist-pagination: cursor (limit + cursor -> data/nextCursor/hasMore/total)
+    x-apievangelist-mcp: https://mcp.scorecard.io/mcp
+    x-apievangelist-sdks: [python (scorecard-ai), typescript (scorecard-ai), go (scorecard-go)]
+    x-apievangelist-status-page: https://status.scorecard.io/
+    x-apievangelist-trust-center: https://trust.scorecard.io/
+- target: $.info
+  update:
+    x-apievangelist-tags: [AI, Agents, Evaluation, Testing, LLM, Observability, Simulation]

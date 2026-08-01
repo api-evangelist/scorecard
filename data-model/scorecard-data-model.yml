@@ -1,0 +1,83 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/scorecard-openapi-original.yml
+entities:
+- name: Project
+  description: Top-level container for evaluation work (testsets, metrics, runs, systems).
+- name: Testset
+  description: A curated dataset of testcases belonging to a Project.
+- name: Testcase
+  description: A single input/expected item within a Testset.
+- name: Metric
+  description: A configured evaluator (AI, human, or heuristic) for scoring outputs.
+- name: Run
+  description: An execution of a system over a testset, producing records.
+- name: Record
+  description: A single evaluated result within a Run, with associated scores.
+- name: Score
+  description: The result of applying a MetricConfig to a Record.
+- name: Annotation
+  description: Reviewer rating/comment attached to a Record.
+- name: RecordTag
+  description: A tag applied to a Record.
+- name: System
+  description: A named definition of the agent/system under test.
+- name: SystemVersion
+  description: A versioned snapshot of a System.
+relationships:
+- from: Testset
+  to: Project
+  type: belongs_to
+  via: projectId (path)
+- from: Testcase
+  to: Testset
+  type: belongs_to
+  via: testsetId
+- from: Metric
+  to: Project
+  type: belongs_to
+  via: projectId (path)
+- from: Run
+  to: Project
+  type: belongs_to
+  via: projectId (path)
+- from: Run
+  to: Testset
+  type: belongs_to
+  via: testsetId
+- from: Run
+  to: System
+  type: belongs_to
+  via: systemId
+- from: Run
+  to: SystemVersion
+  type: belongs_to
+  via: systemVersionId
+- from: Record
+  to: Run
+  type: belongs_to
+  via: runId
+- from: Record
+  to: Testcase
+  type: belongs_to
+  via: testcaseId
+- from: Score
+  to: Record
+  type: belongs_to
+  via: recordId
+- from: Score
+  to: Metric
+  type: belongs_to
+  via: metricConfigId
+- from: Annotation
+  to: Record
+  type: belongs_to
+  via: recordId
+- from: RecordTag
+  to: Record
+  type: belongs_to
+  via: recordId
+- from: SystemVersion
+  to: System
+  type: belongs_to
+  via: systemId

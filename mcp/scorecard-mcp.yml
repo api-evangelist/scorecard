@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://docs.scorecard.io/features/mcp
+server:
+  name: scorecard_ai
+  transport: http
+  url: https://mcp.scorecard.io/mcp
+  local:
+    command: npx
+    args: ["-y", "scorecard-ai-mcp@latest"]
+    env:
+      SCORECARD_API_KEY: ak_...
+  auth: Bearer API key (SCORECARD_API_KEY, prefix ak_)
+install:
+  claude_code: claude mcp add --transport http scorecard https://mcp.scorecard.io/mcp
+  claude_desktop: Settings > Connectors > Add custom connector > https://mcp.scorecard.io/mcp
+notes: >-
+  The official Scorecard MCP server exposes ~45 tools spanning projects,
+  testsets, testcases, systems, metrics, runs, records, scores, and annotations,
+  plus documentation search. Tools map to the Scorecard REST API operations in
+  openapi/scorecard-openapi-original.yml. Available both as a hosted remote HTTP
+  server and locally via the scorecard-ai-mcp npm package.
+tool_families:
+- projects
+- testsets
+- testcases
+- systems
+- metrics
+- runs
+- records
+- scores
+- annotations
+- documentation-search

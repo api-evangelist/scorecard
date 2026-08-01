@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.scorecard.io/changelog
+scheme: dated
+notes: Scorecard publishes a dated product-updates changelog (no semantic version scheme).
+entries:
+- date: '2026-07-10'
+  title: Bug Fixes and Improvements
+  breaking: false
+  highlights:
+  - Removed Temperature, Maximum Length, and Top P controls from UI.
+  - Records with hidden metric columns now auto-reveal when scoring completes.
+  - Claude Agent SDK snippets include expanded OpenTelemetry logging options.
+  - Record creation API now accepts bodies up to 15MB with proper error handling.
+- date: '2026-05-29'
+  title: Conversation View Enhancements
+  breaking: false
+  highlights:
+  - Conversation view is now the default landing page for record details.
+  - Debug tab (formerly span tree view) moved to end of tab order.
+  - New expand/collapse all toggle for tool steps and nested content.
+  - Persistent collapse state maintained when switching between tabs.
+- date: '2026-05-22'
+  title: Annotations & Trace Comparison
+  breaking: false
+  highlights:
+  - New optional Annotations column surfaces reviewer feedback in records table.
+  - Trace Chat tab now supports comparing multiple records side-by-side.
+  - Export annotations as JSON with full trace context preservation.
+  - Improved LiteLLM model catalog resolution.
+- date: '2026-05-08'
+  title: Conversation View Improvements
+  breaking: false
+  highlights:
+  - Failed tool calls display red error pills with truncated previews.
+  - Sub-agent runs now render inline under parent tool calls with full context.
+  - Clickable span links in Chat tab jump to Spans tab with auto-scroll.
+  - Records now display error statuses previously hidden as success flags.
+- date: '2026-04-10'
+  title: Records Analysis Launch
+  breaking: false
+  highlights:
+  - AI-powered "Records Analysis" banner detects patterns across latest records.
+  - Automatic insights identify hallucinations, failures, scoring anomalies.
+  - Severity-ranked findings with instant filtering to affected records.
+  - Auto-refresh as new records arrive with manual refresh option.

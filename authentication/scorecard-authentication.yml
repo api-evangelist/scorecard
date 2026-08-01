@@ -1,0 +1,13 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/scorecard-openapi-original.yml
+summary:
+  types:
+  - http
+schemes:
+- name: ApiKeyAuth
+  type: http
+  scheme: bearer
+  bearerFormat: starts with ak_
+  sources:
+  - openapi/scorecard-openapi-original.yml

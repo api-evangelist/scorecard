@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/scorecard-openapi-original.yml + https://trust.scorecard.io/
+standards:
+- id: oauth2
+  conforms: false
+  evidence: securityScheme is http bearer (API key), not oauth2
+- id: openid-connect
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: error responses use a custom {code,message,details} ApiError envelope, not application/problem+json
+- id: cursor-pagination
+  conforms: true
+  evidence: list operations use limit + cursor params returning {data, nextCursor, hasMore, total}
+- id: bearer-token-auth
+  conforms: true
+  evidence: securityScheme ApiKeyAuth is http bearer (token prefix ak_)
+- id: openapi-3.1
+  conforms: true
+  evidence: spec declares openapi 3.1.0
+- id: soc2
+  conforms: true
+  evidence: SOC 2 compliance published at https://trust.scorecard.io/
