@@ -139,6 +139,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/scorecard-openapi-overlay.yaml
 - type: TrustCenter
   url: security/scorecard-trust-center.yml
 - type: DomainSecurity
