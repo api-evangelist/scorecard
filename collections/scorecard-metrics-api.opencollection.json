@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scorecard Metrics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Metric to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Metric by ID."
+        },
+        {
+          "info": {
+            "name": "Update Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api2.scorecard.io/api/v2/metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Metric to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing Metric. You must specify the evalType and outputType of the metric. The structure of a metric depends on the evalType and outputType of the metric."
+        },
+        {
+          "info": {
+            "name": "Delete Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.scorecard.io/api/v2/metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Metric to delete."
+              }
+            ]
+          },
+          "docs": "Delete a specific Metric by ID. The metric will be removed from metric groups and monitors."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,280 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scorecard Metrics Projects API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/projects",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all Projects. Projects are ordered by creation date, with oldest Projects first."
+        },
+        {
+          "info": {
+            "name": "Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Project."
+        },
+        {
+          "info": {
+            "name": "List Testsets in Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/testsets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Project."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of Testsets belonging to a Project."
+        },
+        {
+          "info": {
+            "name": "Create Testset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/testsets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Project to create the Testset in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Testset for a Project. The Testset will be created in the Project specified in the path."
+        },
+        {
+          "info": {
+            "name": "List Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/metrics",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Project to list Metrics for."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "List Metrics configured for the specified Project. Metrics are returned in reverse chronological order."
+        },
+        {
+          "info": {
+            "name": "Create Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/metrics",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Project to create the Metric in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Metric for evaluating system outputs. The structure of a metric depends on the evalType and outputType of the metric."
+        },
+        {
+          "info": {
+            "name": "List Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/runs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Run's Project."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all Runs for a Project. Runs are ordered by creation date, most recent first."
+        },
+        {
+          "info": {
+            "name": "Create Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/runs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Run."
+        },
+        {
+          "info": {
+            "name": "List systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/systems",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the system's Project."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all systems. Systems are ordered by creation date."
+        },
+        {
+          "info": {
+            "name": "Create (upsert) system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/projects/:projectId/systems",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the system's Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new system. If one with the same name in the project exists, it updates it instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

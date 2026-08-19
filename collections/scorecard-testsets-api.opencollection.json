@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scorecard Metrics Testsets API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Testsets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Testset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/testsets/:testsetId",
+            "params": [
+              {
+                "name": "testsetId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testset."
+              }
+            ]
+          },
+          "docs": "Get Testset"
+        },
+        {
+          "info": {
+            "name": "Update Testset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api2.scorecard.io/api/v2/testsets/:testsetId",
+            "params": [
+              {
+                "name": "testsetId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testset to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Testset. Only the fields provided in the request body will be updated.\nIf a field is provided, the new content will replace the existing content.\nIf a field is not provided, the existing content will remain unchanged.\n\nWhen updating the schema:\n- If field mappings are not provided and existing mappings reference fields that no longer exist, those mappings will be automatically removed\n- To preserve all existing mappings, ensure all referenced fields remain in the updated schema\n- For co"
+        },
+        {
+          "info": {
+            "name": "Delete Testset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.scorecard.io/api/v2/testsets/:testsetId",
+            "params": [
+              {
+                "name": "testsetId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testset to delete."
+              }
+            ]
+          },
+          "docs": "Delete Testset"
+        },
+        {
+          "info": {
+            "name": "List Testcases in Testset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/testsets/:testsetId/testcases",
+            "params": [
+              {
+                "name": "testsetId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testset to list Testcases from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of Testcases belonging to a Testset."
+        },
+        {
+          "info": {
+            "name": "Create multiple Testcases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/testsets/:testsetId/testcases",
+            "params": [
+              {
+                "name": "testsetId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testset to add the Testcases to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple Testcases in the specified Testset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

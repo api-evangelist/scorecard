@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scorecard Metrics Testcases API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Testcases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Testcase",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.scorecard.io/api/v2/testcases/:testcaseId",
+            "params": [
+              {
+                "name": "testcaseId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testcase to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Testcase by ID."
+        },
+        {
+          "info": {
+            "name": "Update Testcase",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.scorecard.io/api/v2/testcases/:testcaseId",
+            "params": [
+              {
+                "name": "testcaseId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Testcase to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the data of an existing Testcase while keeping its ID."
+        },
+        {
+          "info": {
+            "name": "Delete multiple Testcases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.scorecard.io/api/v2/testcases/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete multiple Testcases by their IDs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

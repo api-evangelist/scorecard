@@ -1,0 +1,1157 @@
+{
+  "item": [
+    {
+      "id": "80eb12f5-464a-4acd-9966-57f5bbac2e4b",
+      "name": "Testsets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ab2c23d-24c5-474a-a7d7-3912c3e5b6f4",
+          "name": "Get Testset",
+          "request": {
+            "name": "Get Testset",
+            "description": {},
+            "url": {
+              "path": [
+                "testsets",
+                ":testsetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "testsetId",
+                  "description": "(Required) The ID of the Testset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f8a85bd-866b-4de2-bacb-262536162d2e",
+              "name": "Successfully retrieved Testset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"246\",\n  \"name\": \"Long Context Q&A\",\n  \"description\": \"Testset for long context Q&A chatbot.\",\n  \"jsonSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"question\": {\n        \"type\": \"string\"\n      },\n      \"idealAnswer\": {\n        \"type\": \"string\"\n      },\n      \"provenance\": {\n        \"type\": \"string\"\n      },\n      \"geo\": {\n        \"type\": \"string\"\n      }\n    }\n  },\n  \"fieldMapping\": {\n    \"inputs\": [\n      \"question\"\n    ],\n    \"expected\": [\n      \"idealAnswer\"\n    ],\n    \"metadata\": [\n      \"provenance\",\n      \"geo\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c3652ef-95de-4a00-8fb0-bba3e83597b7",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d636dbcc-2b9b-4b30-8998-71b9de8e3a25",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0dfc17b-150e-44de-9b52-8fe778b1f700",
+          "name": "Update Testset",
+          "request": {
+            "name": "Update Testset",
+            "description": {
+              "content": "Update a Testset. Only the fields provided in the request body will be updated.\nIf a field is provided, the new content will replace the existing content.\nIf a field is not provided, the existing content will remain unchanged.\n\nWhen updating the schema:\n- If field mappings are not provided and existing mappings reference fields that no longer exist, those mappings will be automatically removed\n- To preserve all existing mappings, ensure all referenced fields remain in the updated schema\n- For complete control, provide both schema and fieldMapping when updating the schema",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "testsets",
+                ":testsetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "testsetId",
+                  "description": "(Required) The ID of the Testset to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"jsonSchema\": {\n    \"key_0\": 5707.400605249473,\n    \"key_1\": \"string\"\n  },\n  \"fieldMapping\": {\n    \"inputs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"expected\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"metadata\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d485be5-5f77-41e0-9a17-8d967d94bc77",
+              "name": "Testset updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Q&A Testset\",\n  \"description\": \"Updated description for the Q&A Testset.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"246\",\n  \"name\": \"Updated Q&A Testset\",\n  \"description\": \"Updated description for the Q&A Testset.\",\n  \"jsonSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"question\": {\n        \"type\": \"string\"\n      },\n      \"idealAnswer\": {\n        \"type\": \"string\"\n      },\n      \"provenance\": {\n        \"type\": \"string\"\n      },\n      \"geo\": {\n        \"type\": \"string\"\n      }\n    }\n  },\n  \"fieldMapping\": {\n    \"inputs\": [\n      \"question\"\n    ],\n    \"expected\": [\n      \"idealAnswer\"\n    ],\n    \"metadata\": [\n      \"provenance\",\n      \"geo\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f628a8f8-b777-48b2-9129-78b59f5976ea",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Q&A Testset\",\n  \"description\": \"Updated description for the Q&A Testset.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7314a644-835b-48f5-8c30-bc7747d62d27",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Q&A Testset\",\n  \"description\": \"Updated description for the Q&A Testset.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60a6644b-829e-4eda-bf47-f85bd5ef058c",
+          "name": "Delete Testset",
+          "request": {
+            "name": "Delete Testset",
+            "description": {},
+            "url": {
+              "path": [
+                "testsets",
+                ":testsetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "testsetId",
+                  "description": "(Required) The ID of the Testset to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b450e32-2efc-42f2-9f90-3bb47d30a7ec",
+              "name": "Testset deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67f6a6a5-504b-44aa-83db-b7bb04981b5c",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94b774f2-862f-4c92-b3d6-ae1fe8730871",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bf10648-c287-42f2-a032-cf39874bfc53",
+          "name": "List Testcases in Testset",
+          "request": {
+            "name": "List Testcases in Testset",
+            "description": {
+              "content": "Retrieve a paginated list of Testcases belonging to a Testset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "testsets",
+                ":testsetId",
+                "testcases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "testsetId",
+                  "description": "(Required) The ID of the Testset to list Testcases from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66002c04-5e48-4b67-9305-9d42783602b0",
+              "name": "Successfully retrieved list of Testcases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to list Testcases from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"123\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris\",\n        \"provenance\": \"hand_curated\"\n      },\n      \"inputs\": {\n        \"question\": \"What is the capital of France?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Paris\"\n      }\n    },\n    {\n      \"id\": \"124\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"What is the largest planet in our solar system?\",\n        \"idealAnswer\": \"Jupiter\",\n        \"provenance\": \"synthetic\"\n      },\n      \"inputs\": {\n        \"question\": \"What is the largest planet in our solar system?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Jupiter\"\n      }\n    },\n    {\n      \"id\": \"125\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"What is the deepest ocean on Earth?\",\n        \"provenance\": \"user_feedback\"\n      },\n      \"inputs\": {\n        \"question\": \"What is the deepest ocean on Earth?\"\n      },\n      \"expected\": {},\n      \"validationErrors\": [\n        {\n          \"path\": \"/data\",\n          \"message\": \"Required field 'idealAnswer' is missing\"\n        }\n      ]\n    }\n  ],\n  \"nextCursor\": \"126\",\n  \"hasMore\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab898130-f04d-459d-8315-fc64c80a036f",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to list Testcases from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51809a03-7864-4f3c-80f7-1a41596d8dd6",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to list Testcases from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2e65d6e-fb90-4ed8-86c8-d5d19cae06a5",
+          "name": "Create multiple Testcases",
+          "request": {
+            "name": "Create multiple Testcases",
+            "description": {
+              "content": "Create multiple Testcases in the specified Testset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "testsets",
+                ":testsetId",
+                "testcases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "testsetId",
+                  "description": "(Required) The ID of the Testset to add the Testcases to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"jsonData\": {\n        \"key_0\": 4837.672465061876\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3228fa4e-6b4c-4f79-a733-2258b2f211e5",
+              "name": "Testcases created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to add the Testcases to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"jsonData\": {\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris\",\n        \"provenance\": \"hand_curated\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"What is the largest planet in our solar system?\",\n        \"idealAnswer\": \"Jupiter\",\n        \"provenance\": \"synthetic\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"How many planets are in our solar system?\",\n        \"idealAnswer\": 8,\n        \"provenance\": \"user_feedback\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"123\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris\",\n        \"provenance\": \"hand_curated\"\n      },\n      \"inputs\": {\n        \"question\": \"What is the capital of France?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Paris\"\n      }\n    },\n    {\n      \"id\": \"124\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"What is the largest planet in our solar system?\",\n        \"idealAnswer\": \"Jupiter\",\n        \"provenance\": \"synthetic\"\n      },\n      \"inputs\": {\n        \"question\": \"What is the largest planet in our solar system?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Jupiter\"\n      }\n    },\n    {\n      \"id\": \"125\",\n      \"testsetId\": \"246\",\n      \"jsonData\": {\n        \"question\": \"How many planets are in our solar system?\",\n        \"idealAnswer\": 8,\n        \"provenance\": \"user_feedback\"\n      },\n      \"inputs\": {\n        \"question\": \"How many planets are in our solar system?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": 8\n      },\n      \"validationErrors\": [\n        {\n          \"path\": \"/data/idealAnswer\",\n          \"message\": \"Expected string, received number\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3c51739-1081-49df-b074-b6825248ff6d",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to add the Testcases to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"jsonData\": {\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris\",\n        \"provenance\": \"hand_curated\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"What is the largest planet in our solar system?\",\n        \"idealAnswer\": \"Jupiter\",\n        \"provenance\": \"synthetic\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"How many planets are in our solar system?\",\n        \"idealAnswer\": 8,\n        \"provenance\": \"user_feedback\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d962a3c-5e2a-4b49-b6eb-8c13f70389f8",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testsets",
+                    ":testsetId",
+                    "testcases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "testsetId",
+                      "description": "(Required) The ID of the Testset to add the Testcases to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"jsonData\": {\n        \"question\": \"What is the capital of France?\",\n        \"idealAnswer\": \"Paris\",\n        \"provenance\": \"hand_curated\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"What is the largest planet in our solar system?\",\n        \"idealAnswer\": \"Jupiter\",\n        \"provenance\": \"synthetic\"\n      }\n    },\n    {\n      \"jsonData\": {\n        \"question\": \"How many planets are in our solar system?\",\n        \"idealAnswer\": 8,\n        \"provenance\": \"user_feedback\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.scorecard.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ae91452-30c3-4358-9201-189bcccbbfd8",
+    "name": "Scorecard Metrics Testsets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Scorecard",
+      "type": "text/plain"
+    }
+  }
+}

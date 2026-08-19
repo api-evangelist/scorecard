@@ -1,0 +1,762 @@
+{
+  "item": [
+    {
+      "id": "531ec2de-30e6-4787-bf7a-9e5cbbb1426d",
+      "name": "Runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0085e653-3b2e-43c2-ac5f-0d33ec6ef21d",
+          "name": "Get Run",
+          "request": {
+            "name": "Get Run",
+            "description": {
+              "content": "Retrieve a specific Run by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "runs",
+                ":runId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "runId",
+                  "description": "(Required) The ID of the Run to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "169047a1-f0d6-4a09-9c75-9acd08d424ed",
+              "name": "Successfully retrieved Run.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"135\",\n  \"testsetId\": \"246\",\n  \"systemId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"systemVersionId\": \"87654321-4d3b-4ae4-8c7a-4b6e2a19ccf0\",\n  \"metricIds\": [\n    \"789\",\n    \"101\"\n  ],\n  \"metricVersionIds\": [\n    \"87654321-4d3b-4ae4-8c7a-4b6e2a19ccf0\",\n    \"87654321-4d3b-4ae4-8c7a-4b6e2a19ccf1\"\n  ],\n  \"numRecords\": 10,\n  \"numExpectedRecords\": 10,\n  \"numScores\": 20,\n  \"status\": \"completed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d64afe79-2239-44e0-a22f-d05314f33593",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb517c4d-ca22-4f06-a600-4de4b0505063",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c33c9153-1acc-466c-a1f3-484fefee8655",
+          "name": "Create Record",
+          "request": {
+            "name": "Create Record",
+            "description": {
+              "content": "Create a new Record in a Run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "runs",
+                ":runId",
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "runId",
+                  "description": "(Required) The ID of the Run."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": 971\n  },\n  \"expected\": {\n    \"key_0\": 3311.4398357160544,\n    \"key_1\": 489.85734874722243\n  },\n  \"outputs\": {\n    \"key_0\": 9617,\n    \"key_1\": false,\n    \"key_2\": 5667.735829829168\n  },\n  \"testcaseId\": \"<string>\",\n  \"otelLinkId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b11af399-b495-4677-9f89-34e1e4f8b8e9",
+              "name": "Record created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"testcaseId\": \"248\",\n  \"inputs\": {\n    \"question\": \"What is the capital of France?\"\n  },\n  \"expected\": {\n    \"idealAnswer\": \"Paris is the capital of France\"\n  },\n  \"outputs\": {\n    \"response\": \"The capital of France is Paris.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"864\",\n  \"runId\": \"135\",\n  \"testcaseId\": \"248\",\n  \"inputs\": {\n    \"question\": \"What is the capital of France?\"\n  },\n  \"expected\": {\n    \"idealAnswer\": \"Paris is the capital of France\"\n  },\n  \"outputs\": {\n    \"response\": \"The capital of France is Paris.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cf2389e-3343-4259-9fb3-20fbf50716f7",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"testcaseId\": \"248\",\n  \"inputs\": {\n    \"question\": \"What is the capital of France?\"\n  },\n  \"expected\": {\n    \"idealAnswer\": \"Paris is the capital of France\"\n  },\n  \"outputs\": {\n    \"response\": \"The capital of France is Paris.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7ea9989-b16b-4dbe-b255-53a5e45caaff",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"testcaseId\": \"248\",\n  \"inputs\": {\n    \"question\": \"What is the capital of France?\"\n  },\n  \"expected\": {\n    \"idealAnswer\": \"Paris is the capital of France\"\n  },\n  \"outputs\": {\n    \"response\": \"The capital of France is Paris.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0920054-41e5-4798-94e3-f98e4b4ff6c5",
+          "name": "List Records",
+          "request": {
+            "name": "List Records",
+            "description": {
+              "content": "Retrieve a paginated list of Records for a Run, including all scores for each record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "runs",
+                ":runId",
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return (1-100). Use with `cursor` for pagination through large sets."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination. Pass the `nextCursor` from the previous response to get the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter to records carrying every listed tag (repeatable, AND semantics). E.g. `?tags=urgent&tags=regression`."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter to records carrying every listed tag (repeatable, AND semantics). E.g. `?tags=urgent&tags=regression`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "runId",
+                  "description": "(Required) The ID of the Run to list records for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a6a4d61-de50-4c5d-aad2-b3d3c7e10d3a",
+              "name": "Successfully retrieved list of Records with scores.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to list records for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"456\",\n      \"runId\": \"135\",\n      \"testcaseId\": \"248\",\n      \"inputs\": {\n        \"question\": \"What is the capital of France?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Paris is the capital of France\"\n      },\n      \"outputs\": {\n        \"response\": \"The capital of France is Paris.\"\n      },\n      \"scores\": [\n        {\n          \"recordId\": \"456\",\n          \"metricConfigId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n          \"score\": {\n            \"binaryScore\": true,\n            \"reasoning\": \"The response correctly identifies Paris as the capital.\"\n          }\n        },\n        {\n          \"recordId\": \"456\",\n          \"metricConfigId\": \"b2c3d4e5-f6a7-8901-2345-67890abcdef0\",\n          \"score\": {\n            \"intScore\": 4,\n            \"reasoning\": \"Good answer but could be more detailed.\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"457\",\n      \"runId\": \"135\",\n      \"testcaseId\": \"249\",\n      \"inputs\": {\n        \"question\": \"What is the largest planet in our solar system?\"\n      },\n      \"expected\": {\n        \"idealAnswer\": \"Jupiter\"\n      },\n      \"outputs\": {\n        \"response\": \"Jupiter is the largest planet in our solar system.\"\n      },\n      \"scores\": [\n        {\n          \"recordId\": \"457\",\n          \"metricConfigId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n          \"score\": {\n            \"binaryScore\": true,\n            \"reasoning\": \"Correctly identified Jupiter.\"\n          }\n        },\n        {\n          \"recordId\": \"457\",\n          \"metricConfigId\": \"b2c3d4e5-f6a7-8901-2345-67890abcdef0\",\n          \"score\": {\n            \"intScore\": 5,\n            \"reasoning\": \"Perfect answer with good detail.\"\n          }\n        }\n      ]\n    }\n  ],\n  \"nextCursor\": \"458\",\n  \"hasMore\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "478fe938-23e4-4b72-8d43-efc8a120e6c0",
+              "name": "Error indicating that the request is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to list records for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid or missing authentication token\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b68047c-862a-45d0-a427-e70775f13b4d",
+              "name": "An internal service error indicating an issue with the Scorecard service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "runs",
+                    ":runId",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "123"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The ID of the Run to list records for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred while processing your request.\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.scorecard.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9aed8178-2c88-41cf-ad85-565fa311179e",
+    "name": "Scorecard Metrics Runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Scorecard",
+      "type": "text/plain"
+    }
+  }
+}
