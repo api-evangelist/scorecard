@@ -34,6 +34,17 @@ created: '2026-07-17'
 modified: '2026-07-21'
 tags:
 - Company
+- Artificial Intelligence
+- Agents
+- Evaluation
+- Testing
+- LLM
+- Observability
+- Simulation
+- Developer Tools
+- MCP
+tags_raw:
+- Company
 - AI
 - Agents
 - Evaluation
@@ -62,6 +73,8 @@ apis:
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -110,6 +123,8 @@ apis:
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
+  - Test Cases
+  tags_raw:
   - Testcases
   properties:
   - type: OpenAPI
