@@ -135,7 +135,7 @@ apis:
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
-  - Testcases
+  - Test Cases
   tags_raw:
   - Testcases
   properties:
