@@ -130,30 +130,28 @@ apis:
     url: openapi/scorecard-systems-api-openapi.yml
   - type: Documentation
     url: https://docs.scorecard.io/api-reference/overview
-- aid: scorecard:scorecard-testcases-api
-  name: Scorecard Testcases API
-  description: The Testcases API from Scorecard — 2 operation(s) for testcases.
+- aid: scorecard:scorecard-test-cases-api
+  name: Scorecard Test Cases API
+  description: The Test Cases API from Scorecard — 2 operation(s) for test cases.
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
   - Test Cases
-  tags_raw:
-  - Testcases
   properties:
   - type: OpenAPI
-    url: openapi/scorecard-testcases-api-openapi.yml
+    url: openapi/scorecard-test-cases-api-openapi.yml
   - type: Documentation
     url: https://docs.scorecard.io/api-reference/overview
-- aid: scorecard:scorecard-testsets-api
-  name: Scorecard Testsets API
-  description: The Testsets API from Scorecard — 2 operation(s) for testsets.
+- aid: scorecard:scorecard-test-sets-api
+  name: Scorecard Test Sets API
+  description: The Test Sets API from Scorecard — 2 operation(s) for test sets.
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
-  - Testsets
+  - Test Sets
   properties:
   - type: OpenAPI
-    url: openapi/scorecard-testsets-api-openapi.yml
+    url: openapi/scorecard-test-sets-api-openapi.yml
   - type: Documentation
     url: https://docs.scorecard.io/api-reference/overview
 x-enrichment:
