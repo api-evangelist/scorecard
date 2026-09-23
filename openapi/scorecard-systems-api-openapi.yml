@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Systems API
+  title: Scorecard Systems API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -319,35 +319,6 @@ paths:
       tags:
       - Systems
 components:
-  responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
   schemas:
     System:
       type: object
@@ -403,6 +374,22 @@ components:
         Systems are templates - to run evaluations, pair them with a SystemVersion that provides specific
 
         parameter values.'
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
     SystemVersion:
       type: object
       properties:
@@ -435,22 +422,35 @@ components:
 
 
         When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http

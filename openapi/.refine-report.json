@@ -1,13 +1,7 @@
 {
   "provider": "scorecard",
   "sources": [
-    "scorecard-metrics-api-openapi.yml",
-    "scorecard-projects-api-openapi.yml",
-    "scorecard-records-api-openapi.yml",
-    "scorecard-runs-api-openapi.yml",
-    "scorecard-systems-api-openapi.yml",
-    "scorecard-testcases-api-openapi.yml",
-    "scorecard-testsets-api-openapi.yml"
+    "_original/scorecard-openapi-original.yml"
   ],
   "outputs": [
     "scorecard-metrics-api-openapi.yml",
@@ -18,9 +12,66 @@
     "scorecard-testcases-api-openapi.yml",
     "scorecard-testsets-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "scorecard-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "scorecard-openapi-original.yml: tagged paths POST /projects -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /projects -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /projects/{projectId}/testsets -> Projects",
+    "scorecard-openapi-original.yml: tagged paths POST /projects/{projectId}/testsets -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /testsets/{testsetId} -> Testsets",
+    "scorecard-openapi-original.yml: tagged paths PATCH /testsets/{testsetId} -> Testsets",
+    "scorecard-openapi-original.yml: tagged paths DELETE /testsets/{testsetId} -> Testsets",
+    "scorecard-openapi-original.yml: tagged paths GET /testsets/{testsetId}/testcases -> Testsets",
+    "scorecard-openapi-original.yml: tagged paths POST /testsets/{testsetId}/testcases -> Testsets",
+    "scorecard-openapi-original.yml: tagged paths GET /testcases/{testcaseId} -> Testcases",
+    "scorecard-openapi-original.yml: tagged paths PUT /testcases/{testcaseId} -> Testcases",
+    "scorecard-openapi-original.yml: tagged paths POST /testcases/bulk-delete -> Testcases",
+    "scorecard-openapi-original.yml: tagged paths GET /projects/{projectId}/metrics -> Projects",
+    "scorecard-openapi-original.yml: tagged paths POST /projects/{projectId}/metrics -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /metrics/{metricId} -> Metrics",
+    "scorecard-openapi-original.yml: tagged paths PATCH /metrics/{metricId} -> Metrics",
+    "scorecard-openapi-original.yml: tagged paths DELETE /metrics/{metricId} -> Metrics",
+    "scorecard-openapi-original.yml: tagged paths GET /projects/{projectId}/runs -> Projects",
+    "scorecard-openapi-original.yml: tagged paths POST /projects/{projectId}/runs -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /runs/{runId} -> Runs",
+    "scorecard-openapi-original.yml: tagged paths POST /runs/{runId}/records -> Runs",
+    "scorecard-openapi-original.yml: tagged paths GET /runs/{runId}/records -> Runs",
+    "scorecard-openapi-original.yml: tagged paths DELETE /records/{recordId} -> Records",
+    "scorecard-openapi-original.yml: tagged paths GET /records/{recordId}/annotations -> Records",
+    "scorecard-openapi-original.yml: tagged paths GET /records/{recordId}/tags -> Records",
+    "scorecard-openapi-original.yml: tagged paths POST /records/{recordId}/tags -> Records",
+    "scorecard-openapi-original.yml: tagged paths DELETE /records/{recordId}/tags/{text} -> Records",
+    "scorecard-openapi-original.yml: tagged paths GET /projects/{projectId}/systems -> Projects",
+    "scorecard-openapi-original.yml: tagged paths POST /projects/{projectId}/systems -> Projects",
+    "scorecard-openapi-original.yml: tagged paths GET /systems/{systemId} -> Systems",
+    "scorecard-openapi-original.yml: tagged paths PATCH /systems/{systemId} -> Systems",
+    "scorecard-openapi-original.yml: tagged paths DELETE /systems/{systemId} -> Systems",
+    "scorecard-openapi-original.yml: tagged paths GET /systems/versions/{systemVersionId} -> Systems",
+    "scorecard-openapi-original.yml: tagged paths POST /systems/{systemId}/versions -> Systems",
+    "scorecard-openapi-original.yml: tagged paths PUT /records/{recordId}/scores/{metricConfigId} -> Records",
+    "scorecard-openapi-original.yml: declared missing tag: Metrics",
+    "scorecard-openapi-original.yml: declared missing tag: Projects",
+    "scorecard-openapi-original.yml: declared missing tag: Records",
+    "scorecard-openapi-original.yml: declared missing tag: Runs",
+    "scorecard-openapi-original.yml: declared missing tag: Systems",
+    "scorecard-openapi-original.yml: declared missing tag: Testcases",
+    "scorecard-openapi-original.yml: declared missing tag: Testsets",
+    "superseded outputs removed: scorecard-test-cases-api-openapi.yml, scorecard-test-sets-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 7 total)"
+  ],
+  "skipped": [
+    "scorecard-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-records-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-systems-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-test-cases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scorecard-test-sets-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

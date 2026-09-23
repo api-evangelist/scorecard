@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Records API
+  title: Scorecard Records API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -384,75 +384,7 @@ paths:
       tags:
       - Records
 components:
-  responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
   schemas:
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Annotation.
-        recordId:
-          type: string
-          description: The ID of the Record this Annotation belongs to.
-        spanId:
-          type:
-          - string
-          - 'null'
-          description: Optional span ID linking this annotation to a specific span.
-        rating:
-          type:
-          - boolean
-          - 'null'
-          description: 'The rating of the annotation: true (positive), false (negative), or null (no rating).'
-        comment:
-          type:
-          - string
-          - 'null'
-          description: An optional text comment for the annotation.
-        userId:
-          type: string
-          description: The ID of the user who created the annotation.
-        createdAt:
-          type: string
-          description: The ISO 8601 timestamp when the annotation was created.
-      required:
-      - id
-      - recordId
-      - spanId
-      - rating
-      - comment
-      - userId
-      - createdAt
-      description: An annotation on a Record, containing a rating (thumbs up/down) and/or a text comment.
     RecordTag:
       type: object
       properties:
@@ -503,6 +435,45 @@ components:
       - message
       - details
       description: An API error.
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Annotation.
+        recordId:
+          type: string
+          description: The ID of the Record this Annotation belongs to.
+        spanId:
+          type:
+          - string
+          - 'null'
+          description: Optional span ID linking this annotation to a specific span.
+        rating:
+          type:
+          - boolean
+          - 'null'
+          description: 'The rating of the annotation: true (positive), false (negative), or null (no rating).'
+        comment:
+          type:
+          - string
+          - 'null'
+          description: An optional text comment for the annotation.
+        userId:
+          type: string
+          description: The ID of the user who created the annotation.
+        createdAt:
+          type: string
+          description: The ISO 8601 timestamp when the annotation was created.
+      required:
+      - id
+      - recordId
+      - spanId
+      - rating
+      - comment
+      - userId
+      - createdAt
+      description: An annotation on a Record, containing a rating (thumbs up/down) and/or a text comment.
     Score:
       type: object
       properties:
@@ -539,6 +510,35 @@ components:
       - metricConfigId
       - score
       description: A Score represents the evaluation of a Record against a specific MetricConfig. The actual `score` is stored as flexible JSON. While any JSON is accepted, it is expected to conform to the output schema defined by the MetricConfig. Any discrepancies will be noted in the `validationErrors` field, but the Score will still be stored.
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http

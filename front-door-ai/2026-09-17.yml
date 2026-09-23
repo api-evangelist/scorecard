@@ -1,0 +1,29 @@
+# Front Door AI Index — scorecard — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: scorecard
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.scorecard.io
+  final_host: www.scorecard.io
+  ownership: own
+  owner: scorecard
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 16
+  host_score: 16
+  density: 39.6
+  words: 404
+  tiers:
+    agentic: 4
+    core: 12
+    model: 0
+  ambiguous: 11
+  top_terms:
+    agent: 11
+    AI: 10
+    AI agent: 3
+    LLMs: 2
+    prompts: 1

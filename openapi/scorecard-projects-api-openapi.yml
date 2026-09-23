@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Projects API
+  title: Scorecard Projects API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -1335,6 +1335,170 @@ components:
       - numScores
       - status
       description: A Run in the Scorecard system.
+    System:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The ID of the system.
+        name:
+          type: string
+          description: The name of the system. Unique within the project.
+        description:
+          type: string
+          default: ''
+          description: The description of the system.
+        productionVersion:
+          $ref: '#/components/schemas/SystemVersion'
+          description: The production version of the system.
+        versions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: The ID of the system version.
+              name:
+                type: string
+                description: The name of the system version.
+            required:
+            - id
+            - name
+            description: 'A SystemVersion defines the specific settings for a System Under Test.
+
+
+              System versions contain parameter values that determine system behavior during evaluation.
+
+              They are immutable snapshots - once created, they never change.
+
+
+              When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
+          description: The versions of the system.
+      required:
+      - id
+      - name
+      - description
+      - productionVersion
+      - versions
+      description: 'A System Under Test (SUT).
+
+
+        Systems are templates - to run evaluations, pair them with a SystemVersion that provides specific
+
+        parameter values.'
+    Testset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Testset.
+        name:
+          type: string
+          description: The name of the Testset.
+        description:
+          type: string
+          description: The description of the Testset.
+        jsonSchema:
+          type: object
+          description: The JSON schema for each Testcase in the Testset.
+          additionalProperties: true
+        fieldMapping:
+          type: object
+          properties:
+            inputs:
+              type: array
+              items:
+                type: string
+              description: Fields that represent inputs to the AI system.
+            expected:
+              type: array
+              items:
+                type: string
+              description: Fields that represent expected outputs.
+            metadata:
+              type: array
+              items:
+                type: string
+              description: Fields that are not inputs or expected outputs.
+          required:
+          - inputs
+          - expected
+          - metadata
+          description: Maps top-level keys of the Testcase schema to their roles (input/expected output). Unmapped fields are treated as metadata.
+      required:
+      - id
+      - name
+      - description
+      - jsonSchema
+      - fieldMapping
+      description: 'A collection of Testcases that share the same schema.
+
+        Each Testset defines the structure of its Testcases through a JSON schema.
+
+        The `fieldMapping` object maps top-level keys of the Testcase schema to their roles (input/expected output).
+
+        Fields not mentioned in the `fieldMapping` during creation or update are treated as metadata.
+
+
+        ## JSON Schema validation constraints supported:
+
+
+        - **Required fields** - Fields listed in the schema''s `required` array must be present in Testcases.
+
+        - **Type validation** - Values must match the specified type (string, number, boolean, null, integer, object, array).
+
+        - **Enum validation** - Values must be one of the options specified in the `enum` array.
+
+        - **Object property validation** - Properties of objects must conform to their defined schemas.
+
+        - **Array item validation** - Items in arrays must conform to the `items` schema.
+
+        - **Logical composition** - Values must conform to at least one schema in the `anyOf` array.
+
+
+        Testcases that fail validation will still be stored, but will include `validationErrors` detailing the issues.
+
+        Extra fields in the Testcase data that are not in the schema will be stored but are ignored during validation.'
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Project.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Project.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the Project.
+      required:
+      - id
+      - name
+      - description
+      description: A Project in the Scorecard system.
     Metric:
       anyOf:
       - type: object
@@ -1734,60 +1898,6 @@ components:
         description: A Metric with heuristic evaluation and boolean output.
         title: Heuristic boolean metric
       description: A Metric defines how to evaluate system outputs against expected results.
-    System:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The ID of the system.
-        name:
-          type: string
-          description: The name of the system. Unique within the project.
-        description:
-          type: string
-          default: ''
-          description: The description of the system.
-        productionVersion:
-          $ref: '#/components/schemas/SystemVersion'
-          description: The production version of the system.
-        versions:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-                description: The ID of the system version.
-              name:
-                type: string
-                description: The name of the system version.
-            required:
-            - id
-            - name
-            description: 'A SystemVersion defines the specific settings for a System Under Test.
-
-
-              System versions contain parameter values that determine system behavior during evaluation.
-
-              They are immutable snapshots - once created, they never change.
-
-
-              When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
-          description: The versions of the system.
-      required:
-      - id
-      - name
-      - description
-      - productionVersion
-      - versions
-      description: 'A System Under Test (SUT).
-
-
-        Systems are templates - to run evaluations, pair them with a SystemVersion that provides specific
-
-        parameter values.'
     SystemVersion:
       type: object
       properties:
@@ -1820,116 +1930,6 @@ components:
 
 
         When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
-    Testset:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Testset.
-        name:
-          type: string
-          description: The name of the Testset.
-        description:
-          type: string
-          description: The description of the Testset.
-        jsonSchema:
-          type: object
-          description: The JSON schema for each Testcase in the Testset.
-          additionalProperties: true
-        fieldMapping:
-          type: object
-          properties:
-            inputs:
-              type: array
-              items:
-                type: string
-              description: Fields that represent inputs to the AI system.
-            expected:
-              type: array
-              items:
-                type: string
-              description: Fields that represent expected outputs.
-            metadata:
-              type: array
-              items:
-                type: string
-              description: Fields that are not inputs or expected outputs.
-          required:
-          - inputs
-          - expected
-          - metadata
-          description: Maps top-level keys of the Testcase schema to their roles (input/expected output). Unmapped fields are treated as metadata.
-      required:
-      - id
-      - name
-      - description
-      - jsonSchema
-      - fieldMapping
-      description: 'A collection of Testcases that share the same schema.
-
-        Each Testset defines the structure of its Testcases through a JSON schema.
-
-        The `fieldMapping` object maps top-level keys of the Testcase schema to their roles (input/expected output).
-
-        Fields not mentioned in the `fieldMapping` during creation or update are treated as metadata.
-
-
-        ## JSON Schema validation constraints supported:
-
-
-        - **Required fields** - Fields listed in the schema''s `required` array must be present in Testcases.
-
-        - **Type validation** - Values must match the specified type (string, number, boolean, null, integer, object, array).
-
-        - **Enum validation** - Values must be one of the options specified in the `enum` array.
-
-        - **Object property validation** - Properties of objects must conform to their defined schemas.
-
-        - **Array item validation** - Items in arrays must conform to the `items` schema.
-
-        - **Logical composition** - Values must conform to at least one schema in the `anyOf` array.
-
-
-        Testcases that fail validation will still be stored, but will include `validationErrors` detailing the issues.
-
-        Extra fields in the Testcase data that are not in the schema will be stored but are ignored during validation.'
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Project.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the Project.
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the Project.
-      required:
-      - id
-      - name
-      - description
-      description: A Project in the Scorecard system.
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
   responses:
     ServiceError:
       description: An internal service error indicating an issue with the Scorecard service.

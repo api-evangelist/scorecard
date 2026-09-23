@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Testcases API
+  title: Scorecard Testcases API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -8,7 +8,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Testcases
+- name: Test Cases
 paths:
   /testcases/{testcaseId}:
     get:
@@ -57,7 +57,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testcases/$TESTCASE_ID \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
       tags:
-      - Testcases
+      - Test Cases
     put:
       operationId: updateTestcase
       summary: Update Testcase
@@ -125,7 +125,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testcases/$TESTCASE_ID \\\n    -X PUT \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\" \\\n    -d '{\n          \"jsonData\": {\n            \"question\": \"bar\",\n            \"idealAnswer\": \"bar\",\n            \"provenance\": \"bar\"\n          }\n        }'"
       tags:
-      - Testcases
+      - Test Cases
   /testcases/bulk-delete:
     post:
       operationId: deleteTestcases
@@ -180,37 +180,8 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testcases/bulk-delete \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\" \\\n    -d '{\n          \"ids\": [\n            \"123\",\n            \"124\",\n            \"125\"\n          ]\n        }'"
       tags:
-      - Testcases
+      - Test Cases
 components:
-  responses:
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
   schemas:
     ApiError:
       type: object
@@ -277,6 +248,35 @@ components:
         The `inputs` and `expected` fields are derived from the `data` field based on the Testset''s `fieldMapping`, and include all mapped fields, including those with validation errors.
 
         Testcases are stored regardless of validation results, with any validation errors included in the `validationErrors` field.'
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http

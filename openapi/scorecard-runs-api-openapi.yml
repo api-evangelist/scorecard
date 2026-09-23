@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Runs API
+  title: Scorecard Runs API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -287,79 +287,7 @@ paths:
       tags:
       - Runs
 components:
-  responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
   schemas:
-    Record:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Record.
-        runId:
-          type: string
-          description: The ID of the Run containing this Record.
-        testcaseId:
-          type: string
-          description: The ID of the Testcase.
-        inputs:
-          type: object
-          additionalProperties: true
-          description: The actual inputs sent to the system, which should match the system's input schema.
-        expected:
-          type: object
-          additionalProperties: true
-          description: The expected outputs for the Testcase.
-        outputs:
-          type: object
-          additionalProperties: true
-          description: The actual outputs from the system.
-      required:
-      - id
-      - runId
-      - inputs
-      - expected
-      - outputs
-      description: A record of a system execution in the Scorecard system.
-    RecordWithScores:
-      allOf:
-      - $ref: '#/components/schemas/Record'
-      properties:
-        scores:
-          type: array
-          items:
-            $ref: '#/components/schemas/Score'
-          description: All scores associated with this record.
-      required:
-      - scores
-      description: A record with all its associated scores.
     Run:
       type: object
       properties:
@@ -445,6 +373,37 @@ components:
       - message
       - details
       description: An API error.
+    Record:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Record.
+        runId:
+          type: string
+          description: The ID of the Run containing this Record.
+        testcaseId:
+          type: string
+          description: The ID of the Testcase.
+        inputs:
+          type: object
+          additionalProperties: true
+          description: The actual inputs sent to the system, which should match the system's input schema.
+        expected:
+          type: object
+          additionalProperties: true
+          description: The expected outputs for the Testcase.
+        outputs:
+          type: object
+          additionalProperties: true
+          description: The actual outputs from the system.
+      required:
+      - id
+      - runId
+      - inputs
+      - expected
+      - outputs
+      description: A record of a system execution in the Scorecard system.
     Score:
       type: object
       properties:
@@ -481,6 +440,47 @@ components:
       - metricConfigId
       - score
       description: A Score represents the evaluation of a Record against a specific MetricConfig. The actual `score` is stored as flexible JSON. While any JSON is accepted, it is expected to conform to the output schema defined by the MetricConfig. Any discrepancies will be noted in the `validationErrors` field, but the Score will still be stored.
+    RecordWithScores:
+      allOf:
+      - $ref: '#/components/schemas/Record'
+      properties:
+        scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/Score'
+          description: All scores associated with this record.
+      required:
+      - scores
+      description: A record with all its associated scores.
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http

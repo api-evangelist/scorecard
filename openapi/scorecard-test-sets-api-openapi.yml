@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Scorecard Metrics Testsets API
+  title: Scorecard Testsets API
   description: REST API for Scorecard
   version: 1.0.0
 servers:
@@ -8,7 +8,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Testsets
+- name: Test Sets
 paths:
   /testsets/{testsetId}:
     get:
@@ -68,7 +68,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testsets/$TESTSET_ID \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
       tags:
-      - Testsets
+      - Test Sets
     patch:
       operationId: updateTestset
       summary: Update Testset
@@ -263,7 +263,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testsets/$TESTSET_ID \\\n    -X PATCH \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
       tags:
-      - Testsets
+      - Test Sets
     delete:
       operationId: deleteTestset
       summary: Delete Testset
@@ -300,7 +300,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testsets/$TESTSET_ID \\\n    -X DELETE \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
       tags:
-      - Testsets
+      - Test Sets
   /testsets/{testsetId}/testcases:
     get:
       operationId: listTestcases
@@ -404,7 +404,7 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testsets/$TESTSET_ID/testcases \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\""
       tags:
-      - Testsets
+      - Test Sets
     post:
       operationId: createTestcases
       summary: Create multiple Testcases
@@ -522,37 +522,8 @@ paths:
       - lang: cURL
         source: "curl https://api2.scorecard.io/api/v2/testsets/$TESTSET_ID/testcases \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $SCORECARD_API_KEY\" \\\n    -d '{\n          \"items\": [\n            {\n              \"jsonData\": {\n                \"question\": \"bar\",\n                \"idealAnswer\": \"bar\",\n                \"provenance\": \"bar\"\n              }\n            },\n            {\n              \"jsonData\": {\n                \"question\": \"bar\",\n                \"idealAnswer\": \"bar\",\n                \"provenance\": \"bar\"\n              }\n            },\n            {\n              \"jsonData\": {\n                \"question\": \"bar\",\n                \"idealAnswer\": \"bar\",\n                \"provenance\": \"bar\"\n              }\n            }\n          ]\n        }'"
       tags:
-      - Testsets
+      - Test Sets
 components:
-  responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
   schemas:
     Testset:
       type: object
@@ -627,6 +598,22 @@ components:
         Testcases that fail validation will still be stored, but will include `validationErrors` detailing the issues.
 
         Extra fields in the Testcase data that are not in the schema will be stored but are ignored during validation.'
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
     Testcase:
       type: object
       properties:
@@ -676,22 +663,35 @@ components:
         The `inputs` and `expected` fields are derived from the `data` field based on the Testset''s `fieldMapping`, and include all mapped fields, including those with validation errors.
 
         Testcases are stored regardless of validation results, with any validation errors included in the `validationErrors` field.'
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http
