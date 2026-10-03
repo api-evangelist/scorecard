@@ -414,6 +414,40 @@ components:
               summary: Authentication failure
               description: Error returned when authentication credentials are invalid or missing.
   schemas:
+    RecordTag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the tag.
+        recordId:
+          type: string
+          description: The ID of the Record this tag belongs to.
+        text:
+          type: string
+          description: The tag text. May encode key:value semantics with a colon (e.g. `env:prod`).
+        source:
+          type: string
+          enum:
+          - user
+          - otel
+          description: 'How the tag was applied: `user` (UI, SDK, or REST) or `otel` (lifted from a span attribute at ingest).'
+        userId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the user who applied the tag; null for OTel-sourced tags.
+        createdAt:
+          type: string
+          description: The ISO 8601 timestamp when the tag was created.
+      required:
+      - id
+      - recordId
+      - text
+      - source
+      - userId
+      - createdAt
+      description: An arbitrary tag applied to a Record (e.g. `urgent`, `regression`, `env:prod`), either by a user or lifted from OTel span attributes at ingest.
     Score:
       type: object
       properties:
@@ -450,40 +484,22 @@ components:
       - metricConfigId
       - score
       description: A Score represents the evaluation of a Record against a specific MetricConfig. The actual `score` is stored as flexible JSON. While any JSON is accepted, it is expected to conform to the output schema defined by the MetricConfig. Any discrepancies will be noted in the `validationErrors` field, but the Score will still be stored.
-    RecordTag:
+    ApiError:
       type: object
       properties:
-        id:
+        code:
           type: string
-          description: The ID of the tag.
-        recordId:
+        message:
           type: string
-          description: The ID of the Record this tag belongs to.
-        text:
-          type: string
-          description: The tag text. May encode key:value semantics with a colon (e.g. `env:prod`).
-        source:
-          type: string
-          enum:
-          - user
-          - otel
-          description: 'How the tag was applied: `user` (UI, SDK, or REST) or `otel` (lifted from a span attribute at ingest).'
-        userId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the user who applied the tag; null for OTel-sourced tags.
-        createdAt:
-          type: string
-          description: The ISO 8601 timestamp when the tag was created.
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
       required:
-      - id
-      - recordId
-      - text
-      - source
-      - userId
-      - createdAt
-      description: An arbitrary tag applied to a Record (e.g. `urgent`, `regression`, `env:prod`), either by a user or lifted from OTel span attributes at ingest.
+      - code
+      - message
+      - details
+      description: An API error.
     Annotation:
       type: object
       properties:
@@ -523,22 +539,6 @@ components:
       - userId
       - createdAt
       description: An annotation on a Record, containing a rating (thumbs up/down) and/or a text comment.
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
   securitySchemes:
     ApiKeyAuth:
       type: http

@@ -627,6 +627,22 @@ components:
         Testcases that fail validation will still be stored, but will include `validationErrors` detailing the issues.
 
         Extra fields in the Testcase data that are not in the schema will be stored but are ignored during validation.'
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
     Testcase:
       type: object
       properties:
@@ -676,22 +692,6 @@ components:
         The `inputs` and `expected` fields are derived from the `data` field based on the Testset''s `fieldMapping`, and include all mapped fields, including those with validation errors.
 
         Testcases are stored regardless of validation results, with any validation errors included in the `validationErrors` field.'
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
   securitySchemes:
     ApiKeyAuth:
       type: http

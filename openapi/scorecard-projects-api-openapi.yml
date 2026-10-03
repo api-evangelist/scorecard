@@ -1265,36 +1265,76 @@ paths:
       tags:
       - Projects
 components:
-  responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
-    UnauthenticatedError:
-      description: Error indicating that the request is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Authentication failure:
-              value:
-                code: UNAUTHORIZED
-                message: Invalid or missing authentication token
-                details: {}
-              summary: Authentication failure
-              description: Error returned when authentication credentials are invalid or missing.
   schemas:
+    Run:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Run.
+        testsetId:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The ID of the Testset this Run is testing.
+        systemId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the system this Run is using.
+        systemVersionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the system version this Run is using.
+        metricIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the metrics this Run is using.
+        metricVersionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The IDs of the metric versions this Run is using.
+        numRecords:
+          type: number
+          description: The number of records in the Run.
+        numExpectedRecords:
+          type:
+          - number
+          - 'null'
+          description: The number of expected records in the Run. Determined by the number of testcases in the Run's Testset at the time of Run creation.
+        numScores:
+          type: number
+          description: The number of completed scores in the Run so far.
+        status:
+          type: string
+          enum:
+          - pending
+          - awaiting_execution
+          - running_execution
+          - awaiting_scoring
+          - running_scoring
+          - awaiting_human_scoring
+          - completed
+          description: The status of the Run.
+      required:
+      - id
+      - testsetId
+      - systemId
+      - systemVersionId
+      - metricIds
+      - metricVersionIds
+      - numRecords
+      - numExpectedRecords
+      - numScores
+      - status
+      description: A Run in the Scorecard system.
     SystemVersion:
       type: object
       properties:
@@ -1327,6 +1367,60 @@ components:
 
 
         When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
+    System:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The ID of the system.
+        name:
+          type: string
+          description: The name of the system. Unique within the project.
+        description:
+          type: string
+          default: ''
+          description: The description of the system.
+        productionVersion:
+          $ref: '#/components/schemas/SystemVersion'
+          description: The production version of the system.
+        versions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: The ID of the system version.
+              name:
+                type: string
+                description: The name of the system version.
+            required:
+            - id
+            - name
+            description: 'A SystemVersion defines the specific settings for a System Under Test.
+
+
+              System versions contain parameter values that determine system behavior during evaluation.
+
+              They are immutable snapshots - once created, they never change.
+
+
+              When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
+          description: The versions of the system.
+      required:
+      - id
+      - name
+      - description
+      - productionVersion
+      - versions
+      description: 'A System Under Test (SUT).
+
+
+        Systems are templates - to run evaluations, pair them with a SystemVersion that provides specific
+
+        parameter values.'
     Testset:
       type: object
       properties:
@@ -1400,96 +1494,6 @@ components:
         Testcases that fail validation will still be stored, but will include `validationErrors` detailing the issues.
 
         Extra fields in the Testcase data that are not in the schema will be stored but are ignored during validation.'
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Project.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the Project.
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the Project.
-      required:
-      - id
-      - name
-      - description
-      description: A Project in the Scorecard system.
-    Run:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Run.
-        testsetId:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: The ID of the Testset this Run is testing.
-        systemId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the system this Run is using.
-        systemVersionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the system version this Run is using.
-        metricIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the metrics this Run is using.
-        metricVersionIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The IDs of the metric versions this Run is using.
-        numRecords:
-          type: number
-          description: The number of records in the Run.
-        numExpectedRecords:
-          type:
-          - number
-          - 'null'
-          description: The number of expected records in the Run. Determined by the number of testcases in the Run's Testset at the time of Run creation.
-        numScores:
-          type: number
-          description: The number of completed scores in the Run so far.
-        status:
-          type: string
-          enum:
-          - pending
-          - awaiting_execution
-          - running_execution
-          - awaiting_scoring
-          - running_scoring
-          - awaiting_human_scoring
-          - completed
-          description: The status of the Run.
-      required:
-      - id
-      - testsetId
-      - systemId
-      - systemVersionId
-      - metricIds
-      - metricVersionIds
-      - numRecords
-      - numExpectedRecords
-      - numScores
-      - status
-      description: A Run in the Scorecard system.
     Metric:
       anyOf:
       - type: object
@@ -1889,60 +1893,6 @@ components:
         description: A Metric with heuristic evaluation and boolean output.
         title: Heuristic boolean metric
       description: A Metric defines how to evaluate system outputs against expected results.
-    System:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The ID of the system.
-        name:
-          type: string
-          description: The name of the system. Unique within the project.
-        description:
-          type: string
-          default: ''
-          description: The description of the system.
-        productionVersion:
-          $ref: '#/components/schemas/SystemVersion'
-          description: The production version of the system.
-        versions:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-                description: The ID of the system version.
-              name:
-                type: string
-                description: The name of the system version.
-            required:
-            - id
-            - name
-            description: 'A SystemVersion defines the specific settings for a System Under Test.
-
-
-              System versions contain parameter values that determine system behavior during evaluation.
-
-              They are immutable snapshots - once created, they never change.
-
-
-              When running evaluations, you reference a specific systemVersionId to establish which system version to test.'
-          description: The versions of the system.
-      required:
-      - id
-      - name
-      - description
-      - productionVersion
-      - versions
-      description: 'A System Under Test (SUT).
-
-
-        Systems are templates - to run evaluations, pair them with a SystemVersion that provides specific
-
-        parameter values.'
     ApiError:
       type: object
       properties:
@@ -1959,6 +1909,56 @@ components:
       - message
       - details
       description: An API error.
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Project.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Project.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the Project.
+      required:
+      - id
+      - name
+      - description
+      description: A Project in the Scorecard system.
+  responses:
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
+    UnauthenticatedError:
+      description: Error indicating that the request is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Authentication failure:
+              value:
+                code: UNAUTHORIZED
+                message: Invalid or missing authentication token
+                details: {}
+              summary: Authentication failure
+              description: Error returned when authentication credentials are invalid or missing.
   securitySchemes:
     ApiKeyAuth:
       type: http
