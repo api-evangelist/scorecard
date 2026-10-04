@@ -357,18 +357,6 @@ components:
       - numScores
       - status
       description: A Run in the Scorecard system.
-    RecordWithScores:
-      allOf:
-      - $ref: '#/components/schemas/Record'
-      properties:
-        scores:
-          type: array
-          items:
-            $ref: '#/components/schemas/Score'
-          description: All scores associated with this record.
-      required:
-      - scores
-      description: A record with all its associated scores.
     Record:
       type: object
       properties:
@@ -400,6 +388,34 @@ components:
       - expected
       - outputs
       description: A record of a system execution in the Scorecard system.
+    RecordWithScores:
+      allOf:
+      - $ref: '#/components/schemas/Record'
+      properties:
+        scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/Score'
+          description: All scores associated with this record.
+      required:
+      - scores
+      description: A record with all its associated scores.
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          x-stainless-any: true
+      required:
+      - code
+      - message
+      - details
+      description: An API error.
     Score:
       type: object
       properties:
@@ -436,37 +452,7 @@ components:
       - metricConfigId
       - score
       description: A Score represents the evaluation of a Record against a specific MetricConfig. The actual `score` is stored as flexible JSON. While any JSON is accepted, it is expected to conform to the output schema defined by the MetricConfig. Any discrepancies will be noted in the `validationErrors` field, but the Score will still be stored.
-    ApiError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: object
-          additionalProperties: true
-          x-stainless-any: true
-      required:
-      - code
-      - message
-      - details
-      description: An API error.
   responses:
-    ServiceError:
-      description: An internal service error indicating an issue with the Scorecard service.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          examples:
-            Internal error:
-              value:
-                code: INTERNAL_ERROR
-                message: An unexpected error occurred while processing your request.
-                details: {}
-              summary: Internal error
-              description: Generic error when an unexpected internal issue occurs.
     UnauthenticatedError:
       description: Error indicating that the request is not authenticated.
       content:
@@ -481,6 +467,20 @@ components:
                 details: {}
               summary: Authentication failure
               description: Error returned when authentication credentials are invalid or missing.
+    ServiceError:
+      description: An internal service error indicating an issue with the Scorecard service.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            Internal error:
+              value:
+                code: INTERNAL_ERROR
+                message: An unexpected error occurred while processing your request.
+                details: {}
+              summary: Internal error
+              description: Generic error when an unexpected internal issue occurs.
   securitySchemes:
     ApiKeyAuth:
       type: http
