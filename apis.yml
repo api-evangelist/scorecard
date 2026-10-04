@@ -148,6 +148,8 @@ apis:
   humanURL: https://docs.scorecard.io/api-reference/overview
   baseURL: https://api2.scorecard.io/api/v2
   tags:
+  - Testsets
+  tags_raw:
   - Test Sets
   properties:
   - type: OpenAPI
@@ -165,6 +167,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/scorecard-capability-edges.yml
+  name: Scorecard Business Capability Map
 - type: Overlay
   url: overlays/scorecard-openapi-overlay.yaml
 - type: TrustCenter
