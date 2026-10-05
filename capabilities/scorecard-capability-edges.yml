@@ -1,0 +1,35 @@
+slug: scorecard
+provider: Scorecard
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Test Cases
+  spec_file: scorecard-test-cases-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.75
+  evidence: GET /testcases/{testcaseId} getTestcase Get Testcase; POST /testcases/bulk-delete Delete multiple
+    Testcases
+  reason: Explicit test case CRUD for an evaluation platform that runs agents 'through thousands of realistic
+    scenarios' — test asset stewardship, i.e. software quality engineering.
+- tag: Test Sets
+  spec_file: scorecard-test-sets-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.75
+  evidence: GET /testsets/{testsetId}/testcases listTestcases List Testcases in Testset; POST /testsets/{testsetId}/testcases
+    createTestcases
+  reason: Testsets group testcases used to evaluate AI agents — direct test suite management, matching
+    software quality engineering.
