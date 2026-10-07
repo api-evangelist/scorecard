@@ -165,6 +165,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Plans
+  url: plans/scorecard-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/scorecard-capability-edges.yml
   name: Scorecard Business Capability Map
