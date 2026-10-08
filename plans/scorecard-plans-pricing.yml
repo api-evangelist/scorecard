@@ -1,0 +1,40 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.scorecard.io/pricing
+sources:
+- https://www.scorecard.io/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: Three tiers; scores-based usage included with overage pricing on Growth.
+plan_count: 3
+currency: USD
+plans:
+- name: Starter
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: Unlimited users, 100,000 scores
+- name: Growth
+  price_text: $299
+  price: 299
+  currency: USD
+  period: month
+  included_quota: Unlimited users; Includes 1M scores/mo; Test set management; Prompt playground access;
+    Priority support
+  overage: then $1 per 5K
+- name: Enterprise
+  price_text: Customized Pricing
+  period: none
+  included_quota: Everything in Growth, SAML SSO, SOC 2 compliance reporting, end-to-end data encryption,
+    24/7 VIP support, volume-based usage discounts, customizable contract terms
