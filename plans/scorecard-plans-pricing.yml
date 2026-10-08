@@ -38,3 +38,32 @@ plans:
   period: none
   included_quota: Everything in Growth, SAML SSO, SOC 2 compliance reporting, end-to-end data encryption,
     24/7 VIP support, volume-based usage discounts, customizable contract terms
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  units: []
+  plans:
+  - name: Starter
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Growth
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
